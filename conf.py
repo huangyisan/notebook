@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'notebook'
+project = 'Learning Note'
 copyright = '2018, huangyisan'
 author = 'huangyisan'
 
