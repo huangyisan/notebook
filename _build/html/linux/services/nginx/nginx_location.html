@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. location匹配原则 &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="1.1 解压序列赋值给多个变量" href="nginx_server.html" />
+    <link rel="prev" title="Nginx" href="nginx.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">About Linux Common Service:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="nginx.html">Nginx</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. location匹配原则</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">遵守的大原则</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">匹配顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nginxlocation">﻿nginx配置文件中location的写法先后顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">其他</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nginx_server.html">1.1 解压序列赋值给多个变量</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">About Linux System:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../system/index.html">第一章 如何成为有钱人</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="nginx.html">Nginx</a> &raquo;</li>
+        
+      <li>1. location匹配原则</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/linux/services/nginx/nginx_location.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="location">
+<h1>1. location匹配原则<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h1>
+<p>location前缀：^~、~、~*、=、&#64;、空</p>
+<ul class="simple">
+<li>location分类：<ul>
+<li>普通location：空 最长匹配、=  全匹配、^~  匹配完后不继续匹配正则</li>
+<li>正则location：~ <code class="docutils literal notranslate"><span class="pre">大小写敏感</span></code>。~* <code class="docutils literal notranslate"><span class="pre">大小写不敏感</span></code></li>
+<li>&#64;类型location：&#64; 与服务器交互   也算是普通location的一种，但下面逻辑不包含&#64;的情况。</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="id1">
+<h2>遵守的大原则<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>正则 location 匹配让步普通location 的严格精确匹配结果；<strong>但覆盖普通 location 的最大前缀匹配结果</strong></p>
+</div>
+<div class="section" id="id2">
+<h2>匹配顺序<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>﻿一条请求过来的url，先进行普通匹配，如果被“=”location完美匹配到（location = / {}是例外，这个被完全匹配还是会继续去寻找正则），或者被“^~”匹配到，则不会再进行正则匹配，除开这两种之外的普通location，匹配到之后先存储匹配的结果，接着再进行正则匹配(nginx配置文件存在正则location的情况下)，如果正则匹配能匹配到，则将正则匹配到的结果覆盖普通location，反之则使用普通匹配到的结果。</p>
+</div>
+<div class="section" id="nginxlocation">
+<h2>﻿nginx配置文件中location的写法先后顺序<a class="headerlink" href="#nginxlocation" title="Permalink to this headline">¶</a></h2>
+<p>普通location，和写法顺序无关，最大长度匹配原则，如果之后没去匹配正则，则返回最大长度匹配获得的结果。
+正则location，和写法顺序有关，从上往下匹配，一旦匹配到，直接返回结果。</p>
+</div>
+<div class="section" id="id3">
+<h2>其他<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>普通匹配中，^~和=匹配有什么区别？
+^~遵循最长匹配原则，而=是严格匹配。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nginx_server.html" class="btn btn-neutral float-right" title="1.1 解压序列赋值给多个变量" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nginx.html" class="btn btn-neutral" title="Nginx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
