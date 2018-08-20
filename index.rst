@@ -11,3 +11,4 @@ Welcome to notebook's documentation!
    :caption: Contents:
 
    how_to_be_a_rich_man
+   how_to_be_a_rich_man2
