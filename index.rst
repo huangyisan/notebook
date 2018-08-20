@@ -10,3 +10,5 @@ Welcome to Learning Notebook's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   Linux
+   Python
