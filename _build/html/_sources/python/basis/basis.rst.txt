@@ -1,5 +1,5 @@
 =============================
-Nginx
+Python
 =============================
 
 `官网 <https://nginx.org/>`_
@@ -9,4 +9,4 @@ Nginx
 .. toctree::
    :maxdepth: 1
 
-   nginx_location
+   class_ABC

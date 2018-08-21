@@ -8,11 +8,13 @@ Welcome to Learning Notebook's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: About Linux Common Service:
+   :caption: Linux Common Service:
 
    linux/services/nginx/nginx
 
 .. toctree::
    :maxdepth: 2
-   :caption: About Linux System:
+   :caption: Python Language Basis:
+
+   python/basis/basis
 
