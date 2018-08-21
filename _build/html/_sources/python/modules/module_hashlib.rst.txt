@@ -1,0 +1,8 @@
+=============================
+一、 Module hashlib
+=============================
+
+-----------
+1、功能
+-----------
+**Secure hash and message digest algorithms.**

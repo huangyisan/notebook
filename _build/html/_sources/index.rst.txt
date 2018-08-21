@@ -18,3 +18,8 @@ Welcome to Learning Notebook's documentation!
 
    python/basis/basis
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Python Modules:
+
+   python/modules/build-in/build-in_modules

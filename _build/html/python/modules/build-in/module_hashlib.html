@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>一、 Module hashlib &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Python Build-In Module" href="build-in_modules.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../linux/services/nginx/nginx.html">Nginx</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../basis/basis.html">Python 类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="build-in_modules.html">Python Build-In Module</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">一、 Module hashlib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hashlib">2、hashlib的方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#md5">3、计算字符串md5值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4、一个能计算文件或字符串的md5函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="build-in_modules.html">Python Build-In Module</a> &raquo;</li>
+        
+      <li>一、 Module hashlib</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/python/modules/build-in/module_hashlib.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-hashlib">
+<h1>一、 Module hashlib<a class="headerlink" href="#module-hashlib" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1、功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Secure hash and message digest algorithms.</strong></p>
+</div>
+<div class="section" id="hashlib">
+<h2>2、hashlib的方法<a class="headerlink" href="#hashlib" title="Permalink to this headline">¶</a></h2>
+<p>查看hashilib的方法：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">hashlib</span><span class="p">)</span>
+<span class="go">[&#39;__all__&#39;, &#39;__builtin_constructor_cache&#39;, &#39;__builtins__&#39;, &#39;__cached__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__get_builtin_constructor&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;, &#39;_hashlib&#39;, &#39;algorithms_available&#39;, &#39;algorithms_guaranteed&#39;, &#39;blake2b&#39;, &#39;blake2s&#39;, &#39;md5&#39;, &#39;new&#39;, &#39;pbkdf2_hmac&#39;, &#39;sha1&#39;, &#39;sha224&#39;, &#39;sha256&#39;, &#39;sha384&#39;, &#39;sha3_224&#39;, &#39;sha3_256&#39;, &#39;sha3_384&#39;, &#39;sha3_512&#39;, &#39;sha512&#39;, &#39;shake_128&#39;, &#39;shake_256&#39;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="md5">
+<h2>3、计算字符串md5值<a class="headerlink" href="#md5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>首先实例化md5</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md5</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><em>如果要用其他的，比如sha256之类的也就只需要md5=hashlib.sha256() 来实例化md5即可。</em></p>
+<ul class="simple">
+<li>使用md5.update(b’string’)更新md5，<code class="docutils literal notranslate"><span class="pre">必须是二进制进行计算</span></code></li>
+<li>最后用md5.hexdigest()来得到md5值</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md5</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;huangyisan&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+<span class="go">&#39;1b4ae8b712bd84499feb814954393eb2&#39;</span>
+</pre></div>
+</div>
+<p><strong>此时如果想继续算某个字符串的md5，不能直接md5.update(b’string’)，因为刚才的计算已经污染了，需要重新实例化md5才可以。</strong></p>
+<p><em>上面得到了错误的结果，上面的结果是对huangyisanhuangdou进行了求md5值</em></p>
+<p>修改后的代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 重新实例化md5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">md5</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">md5</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;huangdou&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">md5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+<span class="s1">&#39;3742e5f15192d17f1d1c57b16187d04f&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>4、一个能计算文件或字符串的md5函数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><strong>要考虑字符串可能是数字，字符，或者是二进制流</strong></p>
+<ul class="simple">
+<li>可以把这些类型除了二进制的都转换为字符串，然后再都转换成二进制(主要是处理数字的情况)，因为update(‘’)必须是二进制。</li>
+<li>因为要转换，所以要判断是否是二进制或者非二进制。</li>
+<li>可以通过``type()``去比较，或者用``isinstance()``去判断。</li>
+</ul>
+<p>type()和isinstance()代码示例：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;huan&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="s1">&#39;huang&#39;</span><span class="p">,</span><span class="nb">bytes</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p><strong>当对文本进行md5的时候，则需要指定读多少大小，然后判断是否读完，同时还需要判断输入的文件是否存在。</strong></p>
+<p>判断文件是否存在,可以用 <code class="docutils literal notranslate"><span class="pre">os.path.exists</span></code> 方法。
+代码示例：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/Users/huangyisan/Desktop/qmtv/front-2.0/vhosts/map.conf&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>函数如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="c1"># 定义size大小</span>
+<span class="n">SIZE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
+
+<span class="k">def</span> <span class="nf">md5_string</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="c1"># 判断string类型</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+    <span class="n">md5</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+    <span class="n">md5</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">md5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">md5_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="c1"># 判断文件是否存在</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">md5</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+        <span class="n">fhandler</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">cxt</span> <span class="o">=</span> <span class="n">fhandler</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">SIZE</span><span class="p">)</span>
+            <span class="c1"># 判断文件是否读完</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">cxt</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">md5</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cxt</span><span class="p">)</span>
+
+        <span class="n">fhandler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">md5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s1">&#39;文件不存在&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">md5_string</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">md5_string</span><span class="p">(</span><span class="s1">&#39;huangyisan&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">md5_string</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;huangdou&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">md5_file</span><span class="p">(</span><span class="s1">&#39;/Users/huangyisan/Desktop/qmtv/front-2.0/vhosts/map.conf&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>执行得到的结果为：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c4ca4238a0b923820dcc509a6f75849b</span>
+<span class="mi">1</span><span class="n">b4ae8b712bd84499feb814954393eb2</span>
+<span class="mf">3742e5</span><span class="n">f15192d17f1d1c57b16187d04f</span>
+<span class="mi">9</span><span class="n">a571941cba0cd94d62bca883765427f</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="build-in_modules.html" class="btn btn-neutral" title="Python Build-In Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
