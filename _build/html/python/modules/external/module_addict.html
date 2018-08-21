@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>addict &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Python External Module" href="external_modules.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../linux/services/nginx/nginx.html">Nginx</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../basis/basis.html">Python 类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../build-in/build-in_modules.html">Python Build-In Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="external_modules.html">Python External Module</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">addict</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2、安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3、构造一个嵌套字典</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4、根据结构构造字典</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dict-dict">5、Dict(dict)操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">6、解嵌套字典</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="external_modules.html">Python External Module</a> &raquo;</li>
+        
+      <li>addict</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/python/modules/external/module_addict.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="addict">
+<h1>addict<a class="headerlink" href="#addict" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1、功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>addict模块可以构造嵌套字典，或者解字典。</strong></p>
+</div>
+<div class="section" id="id2">
+<h2>2、安装<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">addict</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>3、构造一个嵌套字典<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>代码:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">addict</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">()</span>
+<span class="n">mapping</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">e</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>首先实例化Dict()对象。</li>
+<li>然后进行嵌套，比如上面是最外层到最内层嵌套a b c d e。</li>
+<li>最后赋值2，是给最后一个key，也就是e进行赋值为2。</li>
+</ul>
+<p>得到的输出为：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>4、根据结构构造字典<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;filtered&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;match&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;addictive&#39;</span><span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;filter&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;term&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;created_by&#39;</span><span class="p">:</span> <span class="s1">&#39;Mats&#39;</span><span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>捋一捋关系，query嵌套了filtered。</li>
+<li>filtered内的query和filter是平行关系。</li>
+<li>内层的query包含match；filter包含term。</li>
+<li>match和term又有各自的嵌套字典。</li>
+</ul>
+<p>代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">addict</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">()</span>
+<span class="go"># 构造filtered的第一个分支，query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filtered</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">match</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;addictive&#39;</span>
+<span class="go"># 构造filtered的第二个分支，filter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filtered</span><span class="o">.</span><span class="n">filter</span><span class="o">.</span><span class="n">term</span><span class="o">.</span><span class="n">created_by</span> <span class="o">=</span> <span class="s1">&#39;Mats&#39;</span>
+</pre></div>
+</div>
+<p>查看mapping输出的结果：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;filtered&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;match&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;addictive&#39;</span><span class="p">}},</span> <span class="s1">&#39;filter&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;term&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;created_by&#39;</span><span class="p">:</span> <span class="s1">&#39;Mats&#39;</span><span class="p">}}}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dict-dict">
+<h2>5、Dict(dict)操作<a class="headerlink" href="#dict-dict" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><strong>可以对一个已经存在的字典进行Dict()操作</strong></div>
+<div class="line"><strong>但得到的对象的值和原有的字典相等，但并不是同一个内存地址</strong></div>
+</div>
+<p>代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">addict</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dictt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;filtered&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;match&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;addictive&#39;</span><span class="p">}},</span> <span class="s1">&#39;filter&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;term&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;created_by&#39;</span><span class="p">:</span> <span class="s1">&#39;Mats&#39;</span><span class="p">}}}}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">(</span><span class="n">dictt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span>
+<span class="go">{&#39;query&#39;: {&#39;filtered&#39;: {&#39;query&#39;: {&#39;match&#39;: {&#39;description&#39;: &#39;addictive&#39;}}, &#39;filter&#39;: {&#39;term&#39;: {&#39;created_by&#39;: &#39;Mats&#39;}}}}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dictt</span>
+<span class="go">{&#39;query&#39;: {&#39;filtered&#39;: {&#39;query&#39;: {&#39;match&#39;: {&#39;description&#39;: &#39;addictive&#39;}}, &#39;filter&#39;: {&#39;term&#39;: {&#39;created_by&#39;: &#39;Mats&#39;}}}}}</span>
+</pre></div>
+</div>
+<p>使用==比较值，使用is比较内存地址：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="o">==</span> <span class="n">dictt</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="ow">is</span> <span class="n">dictt</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>6、解嵌套字典<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>使用</strong> <code class="docutils literal notranslate"><span class="pre">object.key</span></code> <strong>的方式</strong></li>
+<li><strong>使用</strong> <code class="docutils literal notranslate"><span class="pre">dict[key]</span></code> <strong>的方式</strong></li>
+</ul>
+<p>object.key的方式代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span><span class="o">.</span><span class="n">query</span>
+<span class="go">{&#39;filtered&#39;: {&#39;query&#39;: {&#39;match&#39;: {&#39;description&#39;: &#39;addictive&#39;}}, &#39;filter&#39;: {&#39;term&#39;: {&#39;created_by&#39;: &#39;Mats&#39;}}}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filtered</span>
+<span class="go">{&#39;query&#39;: {&#39;match&#39;: {&#39;description&#39;: &#39;addictive&#39;}}, &#39;filter&#39;: {&#39;term&#39;: {&#39;created_by&#39;: &#39;Mats&#39;}}}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>mapping.query，取出query的value</li>
+<li>mapping.query,filtered，取出query嵌套的filtered的value</li>
+</ul>
+<p>dict[key]的方式代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">]</span>
+<span class="go">{&#39;filtered&#39;: {&#39;query&#39;: {&#39;match&#39;: {&#39;description&#39;: &#39;addictive&#39;}}, &#39;filter&#39;: {&#39;term&#39;: {&#39;created_by&#39;: &#39;Mats&#39;}}}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="external_modules.html" class="btn btn-neutral" title="Python External Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

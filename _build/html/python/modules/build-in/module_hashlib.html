@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>一、 Module hashlib &mdash; Learning Notebook v1.0 documentation</title>
+  <title>hashlib &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Python External Module" href="../external/external_modules.html" />
     <link rel="prev" title="Python Build-In Module" href="build-in_modules.html" /> 
 
   
@@ -88,15 +89,16 @@
 <p class="caption"><span class="caption-text">Python Modules:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="build-in_modules.html">Python Build-In Module</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">一、 Module hashlib</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">hashlib</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">1、功能</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hashlib">2、hashlib的方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2、hashlib的方法</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#md5">3、计算字符串md5值</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">4、一个能计算文件或字符串的md5函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4、一个能计算文件或字符串的md5函数</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../external/external_modules.html">Python External Module</a></li>
 </ul>
 
             
@@ -144,7 +146,7 @@
         
           <li><a href="build-in_modules.html">Python Build-In Module</a> &raquo;</li>
         
-      <li>一、 Module hashlib</li>
+      <li>hashlib</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,14 +165,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-hashlib">
-<h1>一、 Module hashlib<a class="headerlink" href="#module-hashlib" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hashlib">
+<h1>hashlib<a class="headerlink" href="#hashlib" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>1、功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p><strong>Secure hash and message digest algorithms.</strong></p>
 </div>
-<div class="section" id="hashlib">
-<h2>2、hashlib的方法<a class="headerlink" href="#hashlib" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>2、hashlib的方法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>查看hashilib的方法：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">hashlib</span><span class="p">)</span>
@@ -208,8 +210,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h2>4、一个能计算文件或字符串的md5函数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>4、一个能计算文件或字符串的md5函数<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p><strong>要考虑字符串可能是数字，字符，或者是二进制流</strong></p>
 <ul class="simple">
 <li>可以把这些类型除了二进制的都转换为字符串，然后再都转换成二进制(主要是处理数字的情况)，因为update(‘’)必须是二进制。</li>
@@ -285,6 +287,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../external/external_modules.html" class="btn btn-neutral float-right" title="Python External Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="build-in_modules.html" class="btn btn-neutral" title="Python Build-In Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
