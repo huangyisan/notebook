@@ -11,6 +11,9 @@ Python Build-In Module
 .. toctree::
    :maxdepth: 1
 
+   module_argparse
    module_hashlib
    module_os
+   module_sys
+
 

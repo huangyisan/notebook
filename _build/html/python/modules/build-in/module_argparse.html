@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>argparse &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hashlib" href="module_hashlib.html" />
+    <link rel="prev" title="Python Build-In Module" href="build-in_modules.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../linux/services/nginx/nginx.html">Nginx</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../basis/basis.html">Python 类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="build-in_modules.html">Python Build-In Module</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">argparse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2、使用方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3、一个完整的例子</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4、传入多个参数</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="module_hashlib.html">hashlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_os.html">os</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_sys.html">sys</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../external/external_modules.html">Python External Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="build-in_modules.html">Python Build-In Module</a> &raquo;</li>
+        
+      <li>argparse</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/python/modules/build-in/module_argparse.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="argparse">
+<h1>argparse<a class="headerlink" href="#argparse" title="Permalink to this headline">¶</a></h1>
+<p>用argparse来更优雅地处理脚本执行参数</p>
+<div class="section" id="id1">
+<h2>1、功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Command-line option and argument parsing library.</strong></p>
+</div>
+<div class="section" id="id2">
+<h2>2、使用方法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;请输入加密类型&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span>  <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>先导入模块</li>
+<li>然后实例化对象</li>
+<li>接着添加参数规则，支持添加多条规则</li>
+<li>然后对刚才实例化对象调用parse_args()方法:</li>
+</ul>
+<p><em>小括号内容，依次为:参数别名1，参数别名2，当输入-h时候回写帮助内容，输入内容被转义后的类型(比如上面是str，那么并不是说不能跟随参数-t 1，此时1会被转义为str类型。而当type=int的时候，如果输入-t cisco，则cisco会因为无法转成int类型而提示用法错误。如果是多个参数的情况下，则是转义list中的每个值)， 默认值。</em></p>
+<p>打印传入的参数</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+</div>
+<p><em>上面的参数是type，所以直接对象.参数别名就能获取到参数了</em></p>
+</div>
+<div class="section" id="id3">
+<h2>3、一个完整的例子<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;请输入加密类型&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--content&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;请输入字符串或路径&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;huangyisan&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 对parser调用parse_args()方法</span>
+    <span class="n">args</span> <span class="o">=</span>  <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>执行结果：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>huangyisan:~ $ python3 /Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/arg.py -t kk -c &#39;ok&#39;
+Namespace(content=&#39;ok&#39;, type=&#39;kk&#39;)
+kk
+ok
+huangyisan:~ $ python3 /Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/arg.py  -c &#39;ok&#39;
+Namespace(content=&#39;ok&#39;, type=&#39;str&#39;)
+str
+ok
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>4、传入多个参数<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p><strong>如果需要传入多个参数，比如-t a b c d 则添加nargs参数，并且定义为’+’，并且把default修改成list类型：</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;--type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;请输入加密类型&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--content&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;请输入字符串或路径&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;huangyisan&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--port&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;端口&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span> <span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mi">80</span><span class="p">],</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span>  <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>上面</em> <code class="docutils literal notranslate"><span class="pre">--port</span></code> <em>就是可以捕获到多个参数, nargs=’+’,default用数组形式赋值</em></p>
+<p>执行结果：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>huangyisan:~ $ python3 /Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/arg.py  -c &#39;ok&#39;
+Namespace(content=&#39;ok&#39;, port=[80], type=&#39;str&#39;)
+str
+ok
+[80]
+huangyisan:~ $ python3 /Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/arg.py  -c &#39;ok&#39; -p 80 8080 90
+Namespace(content=&#39;ok&#39;, port=[80, 8080, 90], type=&#39;str&#39;)
+str
+ok
+[80, 8080, 90]
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="module_hashlib.html" class="btn btn-neutral float-right" title="hashlib" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build-in_modules.html" class="btn btn-neutral" title="Python Build-In Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

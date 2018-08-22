@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python Build-In Module &mdash; Learning Notebook v1.0 documentation</title>
+  <title>sys &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="argparse" href="module_argparse.html" />
-    <link rel="prev" title="一. ABC抽象类" href="../../basis/class_ABC.html" /> 
+    <link rel="next" title="Python External Module" href="../external/external_modules.html" />
+    <link rel="prev" title="os" href="module_os.html" /> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -88,11 +88,17 @@
 </ul>
 <p class="caption"><span class="caption-text">Python Modules:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Python Build-In Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_argparse.html">argparse</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="build-in_modules.html">Python Build-In Module</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="module_hashlib.html">hashlib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_os.html">os</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_sys.html">sys</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">sys</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sys-argv">2、sys.argv()</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">1.1、获取指定参数</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../external/external_modules.html">Python External Module</a></li>
@@ -141,13 +147,15 @@
     
       <li><a href="../../../index.html">Docs</a> &raquo;</li>
         
-      <li>Python Build-In Module</li>
+          <li><a href="build-in_modules.html">Python Build-In Module</a> &raquo;</li>
+        
+      <li>sys</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/python/modules/build-in/build-in_modules.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/python/modules/build-in/module_sys.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,22 +168,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="python-build-in-module">
-<h1>Python Build-In Module<a class="headerlink" href="#python-build-in-module" title="Permalink to this headline">¶</a></h1>
-<div class="line-block">
-<div class="line">使用Python3版本</div>
+  <div class="section" id="sys">
+<h1>sys<a class="headerlink" href="#sys" title="Permalink to this headline">¶</a></h1>
+<p>sys模块的一些常见用法</p>
+<div class="section" id="id1">
+<h2>1、功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Access system-specific parameters and functions.</strong></p>
 </div>
-<div class="line-block">
-<div class="line">Python Build-In Module Index</div>
-<div class="line"><a class="reference external" href="https://docs.python.org/3/py-modindex.html">https://docs.python.org/3/py-modindex.html</a></div>
+<div class="section" id="sys-argv">
+<h2>2、sys.argv()<a class="headerlink" href="#sys-argv" title="Permalink to this headline">¶</a></h2>
+<p><strong>sys.argv()可以获取到当前执行脚本以及跟随的执行参数，参数之间的由空格来分割。</strong></p>
+<p>代码如下:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_argparse.html">argparse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_hashlib.html">hashlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_os.html">os</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_sys.html">sys</a></li>
+<p>执行得到的结果：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>huangyisan:~ $ python3 /Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/exit_code.py 1 2 3
+[&#39;/Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/exit_code.py&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+</pre></div>
+</div>
+<ul class="simple">
+<li>输出结果打印出了</li>
+<li>第”0”参数,脚本全路径</li>
+<li>第”1”参数,1</li>
+<li>第”2”参数,2</li>
+<li>第”3”参数,3</li>
 </ul>
+<div class="section" id="id2">
+<h3>1.1、获取指定参数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><strong>sys.argv[0]则表示脚本全路径，sys.argv[1]则表示第一个参数，后面以此类推。</strong></p>
+<p>代码如下：</p>
+<p>执行输出结果：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>huangyisan:~ $ python3 /Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/exit_code.py 1 2 3
+/Users/huangyisan/Desktop/Python_project/Mage_edu/normal_func/exit_code.py
+1
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -187,10 +219,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="module_argparse.html" class="btn btn-neutral float-right" title="argparse" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../external/external_modules.html" class="btn btn-neutral float-right" title="Python External Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../../basis/class_ABC.html" class="btn btn-neutral" title="一. ABC抽象类" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="module_os.html" class="btn btn-neutral" title="os" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
