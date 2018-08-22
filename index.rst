@@ -24,3 +24,9 @@ Welcome to Learning Notebook's documentation!
 
    python/modules/build-in/build-in_modules
    python/modules/external/external_modules
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Python Magic Method:
+
+   python/magic_method/magic_method
