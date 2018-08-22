@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>七种error_page用法的区别 &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="location匹配原则" href="nginx_location.html" />
+    <link rel="prev" title="Nginx" href="nginx.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="nginx.html">Nginx</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">七种error_page用法的区别</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#error-page-status-code-xx-xx-html">1、error_page status_code /xx/xx.html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2、error_page status_code = /xx/xx.html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-page-status-code-static">3、error_page status_code = &#64;static</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-page-xxx-200-xx-xx-html">4、error_page xxx =200 /xx/xx.html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-page-xxx-code-http-xxx">5、error_page xxx =code http://xxx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-page-xxx-code-fb">6、error_page xxx =code &#64;fb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">7、error_page xxx =code &#64;fb;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nginx_location.html">location匹配原则</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/basis/basis.html">Python 类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/modules/build-in/build-in_modules.html">Python Build-In Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/modules/external/external_modules.html">Python External Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="nginx.html">Nginx</a> &raquo;</li>
+        
+      <li>七种error_page用法的区别</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/linux/services/nginx/nginx_error_page.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="error-page">
+<h1>七种error_page用法的区别<a class="headerlink" href="#error-page" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="error-page-status-code-xx-xx-html">
+<h2>1、error_page status_code /xx/xx.html<a class="headerlink" href="#error-page-status-code-xx-xx-html" title="Permalink to this headline">¶</a></h2>
+<p><strong>如果触发错误状态码，则请求/xx/xx.html，如果请求成功，则最终状态码以第一次的状态码为准；如果请求/xx/xx.html出现了错误状态码，比如404和5xx，那么以后面返回的状态码为准。</strong></p>
+</div>
+<div class="section" id="id1">
+<h2>2、error_page status_code = /xx/xx.html<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>如果中间是=号。那么请求不论是还还是成功，都是以最后一个状态码为准。</strong></p>
+</div>
+<div class="section" id="error-page-status-code-static">
+<h2>3、error_page status_code = &#64;static<a class="headerlink" href="#error-page-status-code-static" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">location</span> <span class="nd">@static</span> <span class="p">{</span>
+    <span class="n">rewrite</span> <span class="o">^</span> <span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">fb</span><span class="o">.</span><span class="n">html</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>和第二种结论一致。</strong></p>
+</div>
+<div class="section" id="error-page-xxx-200-xx-xx-html">
+<h2>4、error_page xxx =200 /xx/xx.html<a class="headerlink" href="#error-page-xxx-200-xx-xx-html" title="Permalink to this headline">¶</a></h2>
+<p><strong>不论前后端如何，都返回200</strong></p>
+</div>
+<div class="section" id="error-page-xxx-code-http-xxx">
+<h2>5、error_page xxx =code <a class="reference external" href="http://xxx">http://xxx</a><a class="headerlink" href="#error-page-xxx-code-http-xxx" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><strong>如果xxx后面没有=指定状态码，则都返回302</strong></div>
+<div class="line"><strong>注意后面是http://xxxx</strong></div>
+</div>
+</div>
+<div class="section" id="error-page-xxx-code-fb">
+<h2>6、error_page xxx =code &#64;fb<a class="headerlink" href="#error-page-xxx-code-fb" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">location</span> <span class="nd">@fb</span><span class="p">{</span>
+    <span class="n">rewrite</span> <span class="o">^</span> <span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">manifest</span><span class="o">.</span><span class="n">c759b8f1</span><span class="o">.</span><span class="n">js</span> <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>这种情况，如果指定了状态码，那么rewrite后得到的状态码就是指定了的code。</strong></p>
+</div>
+<div class="section" id="id2">
+<h2>7、error_page xxx =code &#64;fb;<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">location</span> <span class="nd">@fb</span><span class="p">{</span>
+    <span class="n">rewrite</span> <span class="o">^</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xxxx</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>如果是rewrite给了http或者https，则定义的状态码无效，强制为302。</strong></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nginx_location.html" class="btn btn-neutral float-right" title="location匹配原则" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nginx.html" class="btn btn-neutral" title="Nginx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

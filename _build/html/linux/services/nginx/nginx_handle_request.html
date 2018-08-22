@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nginx如何处理一个请求 &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="location匹配原则" href="nginx_location.html" />
+    <link rel="prev" title="七种error_page用法的区别" href="nginx_error_page.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="nginx.html">Nginx</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nginx_error_page.html">七种error_page用法的区别</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">nginx如何处理一个请求</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、请求原则</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#server-name">2、拒绝未定义的server_name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipserver-name">3、ip和server_name共存的情况</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nginx_location.html">location匹配原则</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/basis/basis.html">Python 类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/modules/build-in/build-in_modules.html">Python Build-In Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/modules/external/external_modules.html">Python External Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="nginx.html">Nginx</a> &raquo;</li>
+        
+      <li>nginx如何处理一个请求</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/linux/services/nginx/nginx_handle_request.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nginx">
+<h1>nginx如何处理一个请求<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1、请求原则<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">1、当一个请求给nginx的时候，nginx通过检查请求头中”Host”字段，来判断把请求递交给哪个域名（如果请求的端口对应存在多个域名的情况下）。</div>
+<div class="line">2、如果没有一个域名匹配，则递交给按配置文件从上至下第一个server，如果有server被指定 <code class="docutils literal notranslate"><span class="pre">default_server</span></code> ,则被这个server所处理。</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="p">{</span>
+   <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+   <span class="n">server_name</span> <span class="n">example</span><span class="o">.</span><span class="n">huangyisan</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+   <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="mi">200</span> <span class="n">example</span><span class="o">.</span><span class="n">huangyisan</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">server</span> <span class="p">{</span>
+   <span class="n">listen</span> <span class="mi">80</span> <span class="n">default_server</span><span class="p">;</span>
+   <span class="n">server_name</span> <span class="n">example</span><span class="o">.</span><span class="n">huangyisan</span><span class="o">.</span><span class="n">net</span><span class="p">;</span>
+   <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="mi">200</span> <span class="n">example</span><span class="o">.</span><span class="n">huangyisan</span><span class="o">.</span><span class="n">net</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">server</span> <span class="p">{</span>
+   <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+   <span class="n">server_name</span> <span class="n">example</span><span class="o">.</span><span class="n">huangyisan</span><span class="o">.</span><span class="n">cn</span><span class="p">;</span>
+   <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="mi">200</span> <span class="n">example</span><span class="o">.</span><span class="n">huangyisan</span><span class="o">.</span><span class="n">cn</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>如果请求expample.huangyisan.cc则会被 标记了 default_server关键字的 example.huangyisan.net响应。</strong></p>
+</div>
+<div class="section" id="server-name">
+<h2>2、拒绝未定义的server_name<a class="headerlink" href="#server-name" title="Permalink to this headline">¶</a></h2>
+<p>如果要拒绝其他未定义的server_name，则可以在nginx.conf顺序里面，第一个写:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="p">{</span>
+    <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="n">deny</span> <span class="nb">all</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ipserver-name">
+<h2>3、ip和server_name共存的情况<a class="headerlink" href="#ipserver-name" title="Permalink to this headline">¶</a></h2>
+<p><strong>当ip和server_name同时存在，且ip多个的时候，首先nginx检测ip，然后在检测header中的Host对应的值去匹配server_name，从而决定分配请求给哪个server。</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="p">{</span>
+   <span class="n">listen</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span><span class="p">:</span><span class="mi">80</span><span class="p">;</span>
+   <span class="n">server_name</span> <span class="n">example</span><span class="o">.</span><span class="n">org</span> <span class="n">www</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="p">;</span>
+   <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="n">server</span> <span class="p">{</span>
+   <span class="n">listen</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span><span class="p">:</span><span class="mi">80</span> <span class="n">default_server</span><span class="p">;</span>
+   <span class="n">server_name</span> <span class="n">example</span><span class="o">.</span><span class="n">net</span> <span class="n">www</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">net</span><span class="p">;</span>
+   <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="n">server</span> <span class="p">{</span>
+   <span class="n">listen</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.2</span><span class="p">:</span><span class="mi">80</span> <span class="n">default_server</span><span class="p">;</span>
+   <span class="n">server_name</span> <span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="n">www</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+   <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>如上配置，如果访问了不存在的server_name，那么ip如果是请求192.168.1.1的则递交给第二个server。</em></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nginx_location.html" class="btn btn-neutral float-right" title="location匹配原则" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nginx_error_page.html" class="btn btn-neutral" title="七种error_page用法的区别" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

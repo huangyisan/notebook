@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nginx中的gzip &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="nginx如何处理一个请求" href="nginx_handle_request.html" />
+    <link rel="prev" title="七种error_page用法的区别" href="nginx_error_page.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="nginx.html">Nginx</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nginx_error_page.html">七种error_page用法的区别</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">nginx中的gzip</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gzip">1、gzip用法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2、gzip简单配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3、gzip的表现</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4、源码判断gzip条件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transfer-encoding-chunked">5、和transfer-encoding:chunked的联系</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nginx_handle_request.html">nginx如何处理一个请求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nginx_location.html">location匹配原则</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/basis/basis.html">Python 类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/modules/build-in/build-in_modules.html">Python Build-In Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/modules/external/external_modules.html">Python External Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="nginx.html">Nginx</a> &raquo;</li>
+        
+      <li>nginx中的gzip</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/linux/services/nginx/nginx_gzip.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nginxgzip">
+<h1>nginx中的gzip<a class="headerlink" href="#nginxgzip" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gzip">
+<h2>1、gzip用法<a class="headerlink" href="#gzip" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">参考官方文档</div>
+<div class="line"><a class="reference external" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html">http://nginx.org/en/docs/http/ngx_http_gzip_module.html</a></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>2、gzip简单配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gzip</span>  <span class="n">on</span><span class="p">;</span>
+<span class="n">gzip_static</span> <span class="n">always</span><span class="p">;</span>
+<span class="n">gzip_disable</span> <span class="s2">&quot;msie6&quot;</span><span class="p">;</span>
+<span class="c1"># gzip_static on;</span>
+<span class="n">gzip_proxied</span> <span class="nb">any</span><span class="p">;</span>
+<span class="n">gzip_min_length</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">gzip_comp_level</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">gzip_types</span>  <span class="n">text</span><span class="o">/</span><span class="n">plain</span> <span class="n">text</span><span class="o">/</span><span class="n">css</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span> <span class="n">application</span><span class="o">/</span><span class="n">javascript</span> <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">javascript</span> <span class="n">text</span><span class="o">/</span><span class="n">xml</span> <span class="n">application</span><span class="o">/</span><span class="n">xml</span> <span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="o">+</span><span class="n">rss</span> <span class="n">text</span><span class="o">/</span><span class="n">javascript</span><span class="p">;</span>
+<span class="n">gzip_buffers</span> <span class="mi">64</span> <span class="mi">4</span><span class="n">k</span><span class="p">;</span>
+<span class="c1">#gzip_http_version 1.0;</span>
+<span class="n">gzip_vary</span> <span class="n">on</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>有时候没有压缩可能是 <code class="docutils literal notranslate"><span class="pre">gzip_types</span></code> 类型没写引起的。</li>
+<li>一些jpg或者视频等内容无需压缩，因为其本身就已经被压缩过一次了。</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>3、gzip的表现<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">gzip压缩后，在response header中有个头部, <code class="docutils literal notranslate"><span class="pre">Content-Encoding:</span> <span class="pre">gzip</span></code></div>
+<div class="line"><em>浏览器调试模式中，这个头部有极大的可能当存在</em> <code class="docutils literal notranslate"><span class="pre">Transfer-Encoding:chunked</span></code> <em>的时候会不出现。</em></div>
+</div>
+<img alt="../../../_images/gzip_response_header.png" src="../../../_images/gzip_response_header.png" />
+<div class="line-block">
+<div class="line">可以使用wireshark抓包进行确定是否进行了gzip</div>
+</div>
+<img alt="../../../_images/gzip_wireshark.png" src="../../../_images/gzip_wireshark.png" />
+</div>
+<div class="section" id="id3">
+<h2>4、源码判断gzip条件<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>在nginx源代码里面判断``不进行``压缩的条件是：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>if (!conf-&gt;enable
+    || (r-&gt;headers_out.status != NGX_HTTP_OK
+        &amp;&amp; r-&gt;headers_out.status != NGX_HTTP_FORBIDDEN
+        &amp;&amp; r-&gt;headers_out.status != NGX_HTTP_NOT_FOUND)
+    || (r-&gt;headers_out.content_encoding
+        &amp;&amp; r-&gt;headers_out.content_encoding-&gt;value.len)
+    || (r-&gt;headers_out.content_length_n != -1
+        &amp;&amp; r-&gt;headers_out.content_length_n &lt; conf-&gt;min_length)
+    || ngx_http_test_content_type(r, &amp;conf-&gt;types) == NULL
+    || r-&gt;header_only)
+</pre></div>
+</div>
+<ul class="simple">
+<li>config文件中未开启gzip     gzip on</li>
+<li>响应头状态码非200 非 403  非404 等其他状态码。</li>
+<li>content_encoding   这个条件未知。</li>
+<li>content_length小于配置文件中gzip_min_length。</li>
+<li>content-type不在config配置文件中 gzip_types。</li>
+</ul>
+</div>
+<div class="section" id="transfer-encoding-chunked">
+<h2>5、和transfer-encoding:chunked的联系<a class="headerlink" href="#transfer-encoding-chunked" title="Permalink to this headline">¶</a></h2>
+<p>虽然transfer-encoding：chunked传输会进行分块传输，从而在response header头部看不到content-type，但并不表示没有，在nginx源代码中开启debug，添加一些信息，则可以看到content-type：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>if (!conf-&gt;enable
+    || (r-&gt;headers_out.status != NGX_HTTP_OK
+        &amp;&amp; r-&gt;headers_out.status != NGX_HTTP_FORBIDDEN
+        &amp;&amp; r-&gt;headers_out.status != NGX_HTTP_NOT_FOUND)
+    || (r-&gt;headers_out.content_encoding
+        &amp;&amp; r-&gt;headers_out.content_encoding-&gt;value.len)
+    || (r-&gt;headers_out.content_length_n != -1
+        &amp;&amp; r-&gt;headers_out.content_length_n &lt; conf-&gt;min_length)
+    || ngx_http_test_content_type(r, &amp;conf-&gt;types) == NULL
+    || r-&gt;header_only)
+
+{
+    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r-&gt;connection-&gt;log, 0,&quot;huangyisan not ok headers_out.status:%d&quot;,r-&gt;headers_out.status);
+    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r-&gt;connection-&gt;log, 0,&quot;huangyisan not ok headers_out.content_encoding:%d&quot;,r-&gt;headers_out.content_encoding);
+    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r-&gt;connection-&gt;log, 0,&quot;huangyisan not ok headers_out.content_length_n:%d&quot;,r-&gt;headers_out.content_length_n);
+    return ngx_http_next_header_filter(r);
+}
+else {
+    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r-&gt;connection-&gt;log, 0,&quot;huangyisan ok headers_out.status:%d&quot;,r-&gt;headers_out.status);
+    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r-&gt;connection-&gt;log, 0,&quot;huangyisan ok headers_out.content_encoding:%d&quot;,r-&gt;headers_out.content_encoding);
+    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r-&gt;connection-&gt;log, 0,&quot;huangyisan ok headers_out.content_length_n:%d&quot;,r-&gt;headers_out.content_length_n);
+}
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nginx_handle_request.html" class="btn btn-neutral float-right" title="nginx如何处理一个请求" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nginx_error_page.html" class="btn btn-neutral" title="七种error_page用法的区别" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
