@@ -30,3 +30,4 @@ Welcome to Learning Notebook's documentation!
    :caption: Python Magic Method:
 
    python/method/magic_method/magic_method
+   python/method/general_method/general_method
