@@ -29,4 +29,4 @@ Welcome to Learning Notebook's documentation!
    :maxdepth: 2
    :caption: Python Magic Method:
 
-   python/magic_method/magic_method
+   python/method/magic_method/magic_method

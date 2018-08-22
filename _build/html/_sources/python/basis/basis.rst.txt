@@ -1,8 +1,8 @@
 =============================
-Python Class
+Python Basis
 =============================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   class_ABC
+   ./class/class
