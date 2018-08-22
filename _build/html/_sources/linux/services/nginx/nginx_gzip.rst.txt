@@ -101,3 +101,5 @@ nginx中的gzip
         ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,"huangyisan ok headers_out.content_encoding:%d",r->headers_out.content_encoding);
         ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,"huangyisan ok headers_out.content_length_n:%d",r->headers_out.content_length_n);
     }
+
+:doc:`My document about chunked <../../../../protocol/http/Transfer-Encoding_chunked>`

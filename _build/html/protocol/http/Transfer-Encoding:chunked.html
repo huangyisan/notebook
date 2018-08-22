@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Transfer-Encoding:chunked &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Https Protocol" href="../https/https.html" />
+    <link rel="prev" title="Http Protocol" href="http.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../linux/services/nginx/nginx.html">Nginx</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/basis/basis.html">Python Basis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/modules/build-in/build-in_modules.html">Python Build-In Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/modules/external/external_modules.html">Python External Module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Magic Method:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/method/magic_method/magic_method.html">Python Magic Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/method/general_method/general_method.html">Python General Method</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="http.html">Http Protocol</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Transfer-Encoding:chunked</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2、简单介绍</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../https/https.html">Https Protocol</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="http.html">Http Protocol</a> &raquo;</li>
+        
+      <li>Transfer-Encoding:chunked</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/protocol/http/Transfer-Encoding:chunked.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="transfer-encoding-chunked">
+<h1>Transfer-Encoding:chunked<a class="headerlink" href="#transfer-encoding-chunked" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1、功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>在http/1.1中提供</strong> <code class="docutils literal notranslate"><span class="pre">分块编码</span></code> <strong>的功能</strong></p>
+</div>
+<div class="section" id="id2">
+<h2>2、简单介绍<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>存在响应头里面</li>
+</ul>
+<img alt="../../_images/response_header_chunked.png" src="../../_images/response_header_chunked.png" />
+<ul class="simple">
+<li>浏览器通过读取 <code class="docutils literal notranslate"><span class="pre">content-length</span></code> 长度来读取服务端实体信息，如果content-length大于实体信息，则会pending；如果content-length比实体信息小，则会截断实体信息，读取部分实体信息。</li>
+<li>由于 Content-Length 字段必须真实反映实体长度，但实际应用中，有些时候实体长度并没那么好获得，例如实体来自于网络文件，或者由动态语言生成。这时候要想准确获取长度，只能开一个足够大的 buffer，等内容全部生成好再计算。但这样做一方面需要更大的内存开销，另一方面也会让客户端等更久。</li>
+<li>web优化有个指标叫做 <code class="docutils literal notranslate"><span class="pre">TTFB</span></code> ，他表示 <code class="docutils literal notranslate"><span class="pre">从客户端发出请求并收到响应的第一个字节所花费的时间</span></code> ,TTFB越短，表示web页面展现越快，用户体验也越好。但如果content-length在某些不容易计算的内容进行提前计算，势必会花费比较大的时间，从而造成TTFB增长。为了解决这个问题，<strong>引入了一个新的机制：不依赖头部的长度信息，也能知道实体的边界</strong>。</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../https/https.html" class="btn btn-neutral float-right" title="Https Protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="http.html" class="btn btn-neutral" title="Http Protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
