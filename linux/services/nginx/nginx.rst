@@ -10,5 +10,6 @@ Nginx
    nginx_error_page
    nginx_gzip
    nginx_handle_request
+   nginx_handle_servername
    nginx_location
 
