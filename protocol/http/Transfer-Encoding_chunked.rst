@@ -59,7 +59,7 @@ Transfer-Encoding:chunked
 
 reference:
 
-https://zh.wikipedia.org/wiki/分块传输编码wiki/分块传输编码
+https://zh.wikipedia.org/wiki/分块传输编码
 https://imququ.com/post/transfer-encoding-header-in-http.html
 
 
