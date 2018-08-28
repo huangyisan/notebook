@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Nginx &mdash; Learning Notebook v1.0 documentation</title>
+  <title>nginx 502 504 状态码产生原因 &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="七种error_page用法的区别" href="nginx_error_page.html" />
-    <link rel="prev" title="Welcome to Learning Notebook’s documentation!" href="../../../index.html" /> 
+    <link rel="next" title="Python Basis" href="../../../python/basis/basis.html" />
+    <link rel="prev" title="location匹配原则" href="nginx_location.html" /> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -80,13 +80,17 @@
             
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Nginx</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="nginx.html">Nginx</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="nginx_error_page.html">七种error_page用法的区别</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nginx_gzip.html">nginx中的gzip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nginx_handle_request.html">nginx如何处理一个请求</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nginx_handle_servername.html">nginx中server_name查询顺序</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nginx_location.html">location匹配原则</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nginx_502_504.html">nginx 502 504 状态码产生原因</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">nginx 502 504 状态码产生原因</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、502状态码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2、504状态码</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -153,13 +157,15 @@
     
       <li><a href="../../../index.html">Docs</a> &raquo;</li>
         
-      <li>Nginx</li>
+          <li><a href="nginx.html">Nginx</a> &raquo;</li>
+        
+      <li>nginx 502 504 状态码产生原因</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/linux/services/nginx/nginx.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/linux/services/nginx/nginx_502_504.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,17 +178,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nginx">
-<h1>Nginx<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://nginx.org/en/docs/">官方文档</a></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="nginx_error_page.html">七种error_page用法的区别</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nginx_gzip.html">nginx中的gzip</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nginx_handle_request.html">nginx如何处理一个请求</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nginx_handle_servername.html">nginx中server_name查询顺序</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nginx_location.html">location匹配原则</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nginx_502_504.html">nginx 502 504 状态码产生原因</a></li>
+  <div class="section" id="nginx-502-504">
+<h1>nginx 502 504 状态码产生原因<a class="headerlink" href="#nginx-502-504" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">结合常见的nginx — &gt; php-fpm的情况</div>
+</div>
+<div class="line-block">
+<div class="line">参考文档</div>
+<div class="line"><a class="reference external" href="https://help.aliyun.com/knowledge_detail/55207.html">https://help.aliyun.com/knowledge_detail/55207.html</a></div>
+</div>
+<div class="section" id="id1">
+<h2>1、502状态码<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>主要产生的原因是php执行超过了，php-fpm中定义的 <cite>request_terminate_timeout</cite> 时间。 <strong>此时是php执行慢超过了自己设定的terminate时间。</strong></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>2、504状态码<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>当请求抵达了php-fpm设定的max_children的最大值的时候，原有的进程处理满，新进来的请求进程一直等待，超过了nginx设定的`fastcgi_read_timeout`时间，则返回504。<strong>此时是php的执行开销(可能还在等待中)大于了nginx设定的时间。</strong></li>
 </ul>
 </div>
 </div>
@@ -195,10 +209,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="nginx_error_page.html" class="btn btn-neutral float-right" title="七种error_page用法的区别" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../../python/basis/basis.html" class="btn btn-neutral float-right" title="Python Basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../../../index.html" class="btn btn-neutral" title="Welcome to Learning Notebook’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="nginx_location.html" class="btn btn-neutral" title="location匹配原则" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

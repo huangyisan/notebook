@@ -12,4 +12,5 @@ Nginx
    nginx_handle_request
    nginx_handle_servername
    nginx_location
+   nginx_502_504
 
