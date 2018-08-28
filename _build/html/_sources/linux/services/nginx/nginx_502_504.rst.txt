@@ -10,12 +10,12 @@ nginx 502 504 状态码产生原因
 -------------
 1、502状态码
 -------------
-* 主要产生的原因是php执行超过了，php-fpm中定义的 `request_terminate_timeout` 时间。 **此时是php执行慢超过了自己设定的terminate时间。**
+* 主要产生的原因是php执行超过了，php-fpm中定义的 ``request_terminate_timeout`` 时间。 **此时是php执行慢超过了自己设定的terminate时间。**
 
 
 -------------
 2、504状态码
 -------------
-* 当请求抵达了php-fpm设定的max_children的最大值的时候，原有的进程处理满，新进来的请求进程一直等待，超过了nginx设定的`fastcgi_read_timeout`时间，则返回504。**此时是php的执行开销(可能还在等待中)大于了nginx设定的时间。**
+* 当请求抵达了php-fpm设定的max_children的最大值的时候，原有的进程处理满，新进来的请求进程一直等待，超过了nginx设定的 ``fastcgi_read_timeout`` 时间，则返回504。**此时是php的执行开销(可能还在等待中)大于了nginx设定的时间。**
 
 

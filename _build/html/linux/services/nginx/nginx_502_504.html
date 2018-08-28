@@ -190,13 +190,13 @@
 <div class="section" id="id1">
 <h2>1、502状态码<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>主要产生的原因是php执行超过了，php-fpm中定义的 <cite>request_terminate_timeout</cite> 时间。 <strong>此时是php执行慢超过了自己设定的terminate时间。</strong></li>
+<li>主要产生的原因是php执行超过了，php-fpm中定义的 <code class="docutils literal notranslate"><span class="pre">request_terminate_timeout</span></code> 时间。 <strong>此时是php执行慢超过了自己设定的terminate时间。</strong></li>
 </ul>
 </div>
 <div class="section" id="id2">
 <h2>2、504状态码<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>当请求抵达了php-fpm设定的max_children的最大值的时候，原有的进程处理满，新进来的请求进程一直等待，超过了nginx设定的`fastcgi_read_timeout`时间，则返回504。<strong>此时是php的执行开销(可能还在等待中)大于了nginx设定的时间。</strong></li>
+<li>当请求抵达了php-fpm设定的max_children的最大值的时候，原有的进程处理满，新进来的请求进程一直等待，超过了nginx设定的 <code class="docutils literal notranslate"><span class="pre">fastcgi_read_timeout</span></code> 时间，则返回504。<strong>此时是php的执行开销(可能还在等待中)大于了nginx设定的时间。</strong></li>
 </ul>
 </div>
 </div>
