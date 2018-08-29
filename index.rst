@@ -14,6 +14,12 @@ Welcome to Learning Notebook's documentation!
 
 .. toctree::
    :maxdepth: 2
+   :caption: Linux System:
+
+   linux/system/system
+
+.. toctree::
+   :maxdepth: 2
    :caption: Python Language Basis:
 
    python/basis/basis

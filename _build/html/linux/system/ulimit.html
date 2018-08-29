@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>浅谈ulimit &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Python Basis" href="../../python/basis/basis.html" />
+    <link rel="prev" title="Linux System" href="system.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../services/nginx/nginx.html">Nginx</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux System:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="system.html">Linux System</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">浅谈ulimit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#limits-conf">limits.conf文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">限制文件打开数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">限制用户最大线程数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/basis/basis.html">Python Basis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/modules/build-in/build-in_modules.html">Python Build-In Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/modules/external/external_modules.html">Python External Module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Magic Method:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/method/magic_method/magic_method.html">Python Magic Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/method/general_method/general_method.html">Python General Method</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../protocol/http/http.html">Http Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocol/https/https.html">Https Protocol</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="system.html">Linux System</a> &raquo;</li>
+        
+      <li>浅谈ulimit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/linux/system/ulimit.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ulimit">
+<h1>浅谈ulimit<a class="headerlink" href="#ulimit" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">参考文档</div>
+<div class="line"><a class="reference external" href="http://www.jianshu.com/p/23ee9db2a620">http://www.jianshu.com/p/23ee9db2a620</a></div>
+<div class="line"><a class="reference external" href="http://blog.csdn.net/SuperChanon/article/details/13303705">http://blog.csdn.net/SuperChanon/article/details/13303705</a></div>
+<div class="line"><a class="reference external" href="http://danielzhou82.github.io/blog/2014/09/30/on-the-confusing-ulimit/">http://danielzhou82.github.io/blog/2014/09/30/on-the-confusing-ulimit/</a></div>
+<div class="line"><a class="reference external" href="https://serverfault.com/questions/265155/soft-limit-vs-hard-limit">https://serverfault.com/questions/265155/soft-limit-vs-hard-limit</a></div>
+</div>
+<div class="section" id="limits-conf">
+<h2>limits.conf文件<a class="headerlink" href="#limits-conf" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>该文件对当前登陆shell的用户有效。</li>
+<li>limits.conf文件实际是Linux PAM（插入式认证模块，Pluggable Authentication Modules）中 pam_limits.so 的配置文件，突破系统的默认限制，对系统访问资源有一定保护作用。</li>
+<li>确定limits.conf文件生效的前提是，确保pam_limits.so 文件被加入到启动文件中。查看 <code class="docutils literal notranslate"><span class="pre">/etc/pam.d/login</span></code> 文件中存在 <code class="docutils literal notranslate"><span class="pre">session</span> <span class="pre">required</span> <span class="pre">/lib/security/pam_limits.so</span></code>。</li>
+<li>limits.conf是 <code class="docutils literal notranslate"><span class="pre">pam_limits.so</span></code> 的配置文件，然后/etc/pam.d/下的应用程序调用pam_***.so模块。譬如说，当用户访问服务器，服务程序将请求发送到PAM模块，PAM模块根据服务名称在/etc/pam.d目录下选择一个对应的服务文件，然后根据服务文件的内容选择具体的PAM模块进行处理。</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>限制文件打开数<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>一般在limits.conf文件中添加如下代码：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">soft</span> <span class="n">nofile</span> <span class="mi">65535</span>
+<span class="o">*</span> <span class="n">hard</span> <span class="n">nofile</span> <span class="mi">65535</span>
+</pre></div>
+</div>
+<p><strong>所有用户的soft limit和hard limit都为65535</strong></p>
+<ul class="simple">
+<li>这个是 <code class="docutils literal notranslate"><span class="pre">单个进程</span></code> 能打开的最大文件数，而不是当前用户所有进程能打开的进程数总和。</li>
+<li>limits.conf中 <code class="docutils literal notranslate"><span class="pre">sort</span> <span class="pre">limit</span></code> 永远不可以大于 <code class="docutils literal notranslate"><span class="pre">hard</span> <span class="pre">limit</span></code> 。</li>
+<li>对于非root用户，不允许更改硬限制或增加soft limit，即非特权用户唯一可以做的就是降低sort limit。</li>
+<li>子进程会继承父进程的文件打开数量。</li>
+<li>hard limit制约了soft limit， <code class="docutils literal notranslate"><span class="pre">soft</span> <span class="pre">limit</span></code> 为真正生效的参数。</li>
+</ul>
+<p>所有进程打开的文件描述符为：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>$ cat /proc/sys/fs/file-max
+
+1620050
+</pre></div>
+</div>
+<ul class="simple">
+<li>所有进程打开的文件描述符数不能超过 <code class="docutils literal notranslate"><span class="pre">/proc/sys/fs/file-max</span></code> 。</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>限制用户最大线程数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>最大线程数配置文件为:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>$ cat /etc/security/limits.d/90-nproc.conf
+
+*          soft    nproc     1024
+root       soft    nproc     unlimited
+</pre></div>
+</div>
+<ul class="simple">
+<li>除了root用户没有限制，其他用户默认限制为最大线程1024个。</li>
+<li>查看某个用户当前使用线程数量为 <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-eLf</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">$USER</span> <span class="pre">|</span> <span class="pre">wc</span> <span class="pre">-l</span></code> 。</li>
+<li>nofile的hard limit不能超过</li>
+</ul>
+<p>查看当前系统使用的打开文件描述符数</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>$cat /proc/sys/fs/file-nr
+
+5664        0        186405
+</pre></div>
+</div>
+</div></blockquote>
+<p>其中第一个数表示当前系统已分配使用的打开文件描述符数，第二个数为分配后已释放的（目前已不再使用），第三个数等于file-max。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../python/basis/basis.html" class="btn btn-neutral float-right" title="Python Basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="system.html" class="btn btn-neutral" title="Linux System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
