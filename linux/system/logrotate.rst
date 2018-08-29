@@ -77,3 +77,21 @@ logrotate内容一般不需要写入crontab里面。因为其通过 ``cron.daily
 .. code-block:: python
 
     logrotate -d $file
+
+-------------------------
+4、nginx日志切割配置举例
+-------------------------
+
+.. code-block:: python
+
+    /app/log/nginx/*.log {
+        daily
+        rotate 5
+        missingok
+        notifempty
+        compress
+        sharedscripts
+        postrotate
+            /bin/kill -USR1 $(cat /var/run/nginx.pid 2>/dev/null) 2>/dev/null || :
+        endscript
+    }

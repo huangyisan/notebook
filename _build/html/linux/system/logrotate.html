@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Logrotate &mdash; Learning Notebook v1.0 documentation</title>
+  <title>logrotate &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Python Basis" href="../../python/basis/basis.html" />
-    <link rel="prev" title="ulimit" href="ulimit.html" /> 
+    <link rel="next" title="ulimit" href="ulimit.html" />
+    <link rel="prev" title="Linux System" href="system.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -85,8 +85,7 @@
 <p class="caption"><span class="caption-text">Linux System:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="system.html">Linux System</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ulimit.html">ulimit</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Logrotate</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">logrotate</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">1、两种切割模式</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id2">1.1、传统模式</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#copytruncate">1.2、copytruncate模式</a></li>
@@ -94,8 +93,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">2、控制执行</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">3、语法测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nginx">4、nginx日志切割配置举例</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="ulimit.html">ulimit</a></li>
 </ul>
 </li>
 </ul>
@@ -164,7 +165,7 @@
         
           <li><a href="system.html">Linux System</a> &raquo;</li>
         
-      <li>Logrotate</li>
+      <li>logrotate</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -184,7 +185,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="logrotate">
-<h1>Logrotate<a class="headerlink" href="#logrotate" title="Permalink to this headline">¶</a></h1>
+<h1>logrotate<a class="headerlink" href="#logrotate" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2>1、两种切割模式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
@@ -252,6 +253,22 @@ START_HOURS_RANGE=3-22
 </pre></div>
 </div>
 </div>
+<div class="section" id="nginx">
+<h2>4、nginx日志切割配置举例<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>/app/log/nginx/*.log {
+    daily
+    rotate 5
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+        /bin/kill -USR1 $(cat /var/run/nginx.pid 2&gt;/dev/null) 2&gt;/dev/null || :
+    endscript
+}
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -262,10 +279,10 @@ START_HOURS_RANGE=3-22
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../python/basis/basis.html" class="btn btn-neutral float-right" title="Python Basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ulimit.html" class="btn btn-neutral float-right" title="ulimit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ulimit.html" class="btn btn-neutral" title="ulimit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="system.html" class="btn btn-neutral" title="Linux System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

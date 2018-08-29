@@ -16,7 +16,8 @@ Welcome to Learning Notebook's documentation!
    :maxdepth: 2
    :caption: Linux System:
 
-   linux/system/system
+   linux/system/logrotate
+   linux/system/ulimit
 
 .. toctree::
    :maxdepth: 2
