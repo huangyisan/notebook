@@ -187,6 +187,7 @@
 <div class="line"><a class="reference external" href="http://danielzhou82.github.io/blog/2014/09/30/on-the-confusing-ulimit/">http://danielzhou82.github.io/blog/2014/09/30/on-the-confusing-ulimit/</a></div>
 <div class="line"><a class="reference external" href="https://serverfault.com/questions/265155/soft-limit-vs-hard-limit">https://serverfault.com/questions/265155/soft-limit-vs-hard-limit</a></div>
 </div>
+<p><strong>centos 7</strong></p>
 <div class="section" id="limits-conf">
 <h2>limits.conf文件<a class="headerlink" href="#limits-conf" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -220,6 +221,10 @@
 <ul class="simple">
 <li>所有进程打开的文件描述符数不能超过 <code class="docutils literal notranslate"><span class="pre">/proc/sys/fs/file-max</span></code> 。</li>
 </ul>
+<p>重启服务后，相关配置会失效，可以将执行修改的命令写入到/etc/rc.local中：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;ulimit -SHn 102400&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">rc</span><span class="o">.</span><span class="n">local</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="id2">
 <h2>限制用户最大线程数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
@@ -233,7 +238,8 @@ root       soft    nproc     unlimited
 <ul class="simple">
 <li>除了root用户没有限制，其他用户默认限制为最大线程1024个。</li>
 <li>查看某个用户当前使用线程数量为 <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-eLf</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">$USER</span> <span class="pre">|</span> <span class="pre">wc</span> <span class="pre">-l</span></code> 。</li>
-<li>nofile的hard limit不能超过</li>
+<li>nofile的hard limit不能超过 <code class="docutils literal notranslate"><span class="pre">/proc/sys/fs/nr_open</span></code>。</li>
+<li>修改后立即生效。</li>
 </ul>
 <p>查看当前系统使用的打开文件描述符数</p>
 <blockquote>

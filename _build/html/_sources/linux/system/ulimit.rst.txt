@@ -8,6 +8,7 @@
 | http://danielzhou82.github.io/blog/2014/09/30/on-the-confusing-ulimit/
 | https://serverfault.com/questions/265155/soft-limit-vs-hard-limit
 
+**centos 7**
 
 -----------------------
 limits.conf文件
@@ -46,6 +47,12 @@ limits.conf文件
 
 * 所有进程打开的文件描述符数不能超过 ``/proc/sys/fs/file-max`` 。
 
+重启服务后，相关配置会失效，可以将执行修改的命令写入到/etc/rc.local中：
+
+.. code-block:: python
+
+    echo "ulimit -SHn 102400" >> /etc/rc.local
+
 -----------------------
 限制用户最大线程数
 -----------------------
@@ -61,7 +68,8 @@ limits.conf文件
 
 * 除了root用户没有限制，其他用户默认限制为最大线程1024个。
 * 查看某个用户当前使用线程数量为 ``ps -eLf | grep $USER | wc -l`` 。
-* nofile的hard limit不能超过
+* nofile的hard limit不能超过 ``/proc/sys/fs/nr_open``。
+* 修改后立即生效。
 
 查看当前系统使用的打开文件描述符数
 
@@ -72,5 +80,3 @@ limits.conf文件
     5664        0        186405
 
 其中第一个数表示当前系统已分配使用的打开文件描述符数，第二个数为分配后已释放的（目前已不再使用），第三个数等于file-max。
-
-
