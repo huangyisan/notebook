@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Python Basis" href="../../python/basis/basis.html" />
+    <link rel="next" title="Logrotate" href="logrotate.html" />
     <link rel="prev" title="Linux System" href="system.html" /> 
 
   
@@ -86,11 +86,12 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="system.html">Linux System</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">浅谈ulimit</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#limits-conf">limits.conf文件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">限制文件打开数</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">限制用户最大线程数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limits-conf">1、limits.conf文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2、限制文件打开数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3、限制用户最大线程数</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="logrotate.html">Logrotate</a></li>
 </ul>
 </li>
 </ul>
@@ -189,7 +190,7 @@
 </div>
 <p><strong>centos 7</strong></p>
 <div class="section" id="limits-conf">
-<h2>limits.conf文件<a class="headerlink" href="#limits-conf" title="Permalink to this headline">¶</a></h2>
+<h2>1、limits.conf文件<a class="headerlink" href="#limits-conf" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>该文件对当前登陆shell的用户有效。</li>
 <li>limits.conf文件实际是Linux PAM（插入式认证模块，Pluggable Authentication Modules）中 pam_limits.so 的配置文件，突破系统的默认限制，对系统访问资源有一定保护作用。</li>
@@ -198,7 +199,7 @@
 </ul>
 </div>
 <div class="section" id="id1">
-<h2>限制文件打开数<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>2、限制文件打开数<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>一般在limits.conf文件中添加如下代码：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">soft</span> <span class="n">nofile</span> <span class="mi">65535</span>
 <span class="o">*</span> <span class="n">hard</span> <span class="n">nofile</span> <span class="mi">65535</span>
@@ -227,7 +228,7 @@
 </div>
 </div>
 <div class="section" id="id2">
-<h2>限制用户最大线程数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>3、限制用户最大线程数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>最大线程数配置文件为:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>$ cat /etc/security/limits.d/90-nproc.conf
 
@@ -261,7 +262,7 @@ root       soft    nproc     unlimited
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../python/basis/basis.html" class="btn btn-neutral float-right" title="Python Basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="logrotate.html" class="btn btn-neutral float-right" title="Logrotate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="system.html" class="btn btn-neutral" title="Linux System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

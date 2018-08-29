@@ -8,3 +8,4 @@ Linux System
    :maxdepth: 1
 
    ulimit
+   logrotate

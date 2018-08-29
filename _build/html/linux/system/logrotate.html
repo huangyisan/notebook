@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Linux System &mdash; Learning Notebook v1.0 documentation</title>
+  <title>Logrotate &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="浅谈ulimit" href="ulimit.html" />
-    <link rel="prev" title="nginx 502 504 状态码产生原因" href="../services/nginx/nginx_502_504.html" /> 
+    <link rel="next" title="Python Basis" href="../../python/basis/basis.html" />
+    <link rel="prev" title="浅谈ulimit" href="ulimit.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -84,9 +84,16 @@
 </ul>
 <p class="caption"><span class="caption-text">Linux System:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Linux System</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="system.html">Linux System</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ulimit.html">浅谈ulimit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="logrotate.html">Logrotate</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Logrotate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1、两种切割模式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">1.1、传统模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#copytruncate">1.2、copytruncate模式</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -153,13 +160,15 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Linux System</li>
+          <li><a href="system.html">Linux System</a> &raquo;</li>
+        
+      <li>Logrotate</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/linux/system/system.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/linux/system/logrotate.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,13 +181,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="linux-system">
-<h1>Linux System<a class="headerlink" href="#linux-system" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ulimit.html">浅谈ulimit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="logrotate.html">Logrotate</a></li>
+  <div class="section" id="logrotate">
+<h1>Logrotate<a class="headerlink" href="#logrotate" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1、两种切割模式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>1.1、传统模式<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">1、首先重命名当前进程正在输出的日志文件名称，因为进程是根据 <code class="docutils literal notranslate"><span class="pre">inode</span></code> 号来确定往哪个日志文件输出，更改日志文件名称并不会影响inode号，所以这步行为中，进程依旧会往修改了名称的日志文件内输出日志。</div>
+<div class="line">2、进行新的日志创建，创建新的日志名称和老旧的日志名称一样，但是因为是新建的。所以inode号不一样。此时进程日志还是依旧输出到老的被重命名了的日志文件里面。</div>
+<div class="line">3、对进程发起信号通知，让其重新写日志，比如nginx为 <code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">-user1</span> <span class="pre">pid</span></code> 让其重载配置文件，实现平滑重启，然后来写入到新建的日志里面。</div>
+</div>
+<ul class="simple">
+<li>nginx可能会对不同location定义不同的日志文件。所以一天的日志会有多个不同的日志文件，因为每滚动一次都会进行kill -user1 pid的信号发送，所以需要配合 <code class="docutils literal notranslate"><span class="pre">shardscripts</span></code> 参数，让程序把所有日志都重命名了以后，只发送一次kill信号。</li>
 </ul>
+</div>
+<div class="section" id="copytruncate">
+<h3>1.2、copytruncate模式<a class="headerlink" href="#copytruncate" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">1、copy当前日志文件，重命名为新文件，这样进程还是往老的文件写入。</div>
+<div class="line">2、然后logrotate对老文件进行truncate，对老文件进行清空。这样就完成了一次日志切割。</div>
+</div>
+<ul class="simple">
+<li>这种日志切割不需要对进程发起重载信号。</li>
+<li>但有个风险，因为会对日志文件进行copy，如果系统文件巨大，那么系统可用空间会突然暴增。</li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -190,10 +218,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ulimit.html" class="btn btn-neutral float-right" title="浅谈ulimit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../python/basis/basis.html" class="btn btn-neutral float-right" title="Python Basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../services/nginx/nginx_502_504.html" class="btn btn-neutral" title="nginx 502 504 状态码产生原因" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ulimit.html" class="btn btn-neutral" title="浅谈ulimit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
