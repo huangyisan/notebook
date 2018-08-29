@@ -25,3 +25,55 @@ Logrotate
 
 * 这种日志切割不需要对进程发起重载信号。
 * 但有个风险，因为会对日志文件进行copy，如果系统文件巨大，那么系统可用空间会突然暴增。
+
+
+--------------------------
+2、控制执行
+--------------------------
+
+logrotate内容一般不需要写入crontab里面。因为其通过 ``cron.daily`` 来控制执行。
+
+.. code-block:: python
+
+    $cat /etc/cron.daily/logrotate
+
+    #!/bin/sh
+
+    /usr/sbin/logrotate /etc/logrotate.conf
+    EXITVALUE=$?
+    if [ $EXITVALUE != 0 ]; then
+        /usr/bin/logger -t logrotate "ALERT exited abnormally with [$EXITVALUE]"
+    fi
+    exit 0
+
+
+**默认情况下,logrotate一般都在凌晨三点左右执行，这是由** ``anacrontab `` **来控制的。**
+
+.. code-block:: python
+
+    $cat /etc/anacrontab
+
+    # /etc/anacrontab: configuration file for anacron
+
+    # See anacron(8) and anacrontab(5) for details.
+
+    SHELL=/bin/sh
+    PATH=/sbin:/bin:/usr/sbin:/usr/bin
+    MAILTO=root
+    # the maximal random delay added to the base delay of the jobs
+    RANDOM_DELAY=45
+    # the jobs will be started during the following hours only
+    START_HOURS_RANGE=3-22
+
+* 由 ``RANDOM_DELAY`` 和 ``START_HOURS_RANGE`` 两个参数共同决定。
+
+
+------------------------
+3、语法测试
+------------------------
+
+可以对logrotate.d下面的独立配置文件进行语法测试
+
+.. code-block:: python
+
+    logrotate -d $file

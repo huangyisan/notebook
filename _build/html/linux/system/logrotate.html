@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Python Basis" href="../../python/basis/basis.html" />
-    <link rel="prev" title="浅谈ulimit" href="ulimit.html" /> 
+    <link rel="prev" title="ulimit" href="ulimit.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -85,13 +85,15 @@
 <p class="caption"><span class="caption-text">Linux System:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="system.html">Linux System</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ulimit.html">浅谈ulimit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulimit.html">ulimit</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Logrotate</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">1、两种切割模式</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id2">1.1、传统模式</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#copytruncate">1.2、copytruncate模式</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2、控制执行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3、语法测试</a></li>
 </ul>
 </li>
 </ul>
@@ -208,6 +210,48 @@
 </ul>
 </div>
 </div>
+<div class="section" id="id3">
+<h2>2、控制执行<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>logrotate内容一般不需要写入crontab里面。因为其通过 <code class="docutils literal notranslate"><span class="pre">cron.daily</span></code> 来控制执行。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>$cat /etc/cron.daily/logrotate
+
+#!/bin/sh
+
+/usr/sbin/logrotate /etc/logrotate.conf
+EXITVALUE=$?
+if [ $EXITVALUE != 0 ]; then
+    /usr/bin/logger -t logrotate &quot;ALERT exited abnormally with [$EXITVALUE]&quot;
+fi
+exit 0
+</pre></div>
+</div>
+<p><strong>默认情况下,logrotate一般都在凌晨三点左右执行，这是由</strong> <a href="#id4"><span class="problematic" id="id5">``</span></a>anacrontab `` <strong>来控制的。</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>$cat /etc/anacrontab
+
+# /etc/anacrontab: configuration file for anacron
+
+# See anacron(8) and anacrontab(5) for details.
+
+SHELL=/bin/sh
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+# the maximal random delay added to the base delay of the jobs
+RANDOM_DELAY=45
+# the jobs will be started during the following hours only
+START_HOURS_RANGE=3-22
+</pre></div>
+</div>
+<ul class="simple">
+<li>由 <code class="docutils literal notranslate"><span class="pre">RANDOM_DELAY</span></code> 和 <code class="docutils literal notranslate"><span class="pre">START_HOURS_RANGE</span></code> 两个参数共同决定。</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>3、语法测试<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>可以对logrotate.d下面的独立配置文件进行语法测试</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>logrotate -d $file
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -221,7 +265,7 @@
         <a href="../../python/basis/basis.html" class="btn btn-neutral float-right" title="Python Basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ulimit.html" class="btn btn-neutral" title="浅谈ulimit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ulimit.html" class="btn btn-neutral" title="ulimit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
