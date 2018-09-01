@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Communicate Principle &mdash; Learning Notebook v1.0 documentation</title>
+  <title>k8s的网络通信 &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -81,10 +81,9 @@
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Communicate Principle</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">k8s的网络通信</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="between_inside.html">内部请求流量的交互</a></li>
 <li class="toctree-l3"><a class="reference internal" href="from_outside.html">外部请求流量的交互</a></li>
-<li class="toctree-l3"><a class="reference internal" href="network.html">k8s的内部网络</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/controller.html">controller</a></li>
@@ -165,7 +164,7 @@
         
           <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
         
-      <li>Communicate Principle</li>
+      <li>k8s的网络通信</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -184,14 +183,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="communicate-principle">
-<h1>Communicate Principle<a class="headerlink" href="#communicate-principle" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="k8s">
+<h1>k8s的网络通信<a class="headerlink" href="#k8s" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>node属于一个网络。称之为 <code class="docutils literal notranslate"><span class="pre">节点网络</span></code> 。</li>
+<li>service属于一个网络，处于iptables。称之为 <code class="docutils literal notranslate"><span class="pre">集群网络</span></code> 。</li>
+<li>pod属于一个网络。称之为 <code class="docutils literal notranslate"><span class="pre">pod网络</span></code> 。</li>
+</ul>
 <p><strong>重点</strong></p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="between_inside.html">内部请求流量的交互</a></li>
 <li class="toctree-l1"><a class="reference internal" href="from_outside.html">外部请求流量的交互</a></li>
-<li class="toctree-l1"><a class="reference internal" href="network.html">k8s的内部网络</a></li>
 </ul>
 </div>
 </div>

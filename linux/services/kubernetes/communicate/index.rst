@@ -1,6 +1,10 @@
-===========================
-Communicate Principle
-===========================
+=====================
+k8s的网络通信
+=====================
+
+* node属于一个网络。称之为 ``节点网络`` 。
+* service属于一个网络，处于iptables。称之为 ``集群网络`` 。
+* pod属于一个网络。称之为 ``pod网络`` 。
 
 **重点**
 
@@ -9,4 +13,3 @@ Communicate Principle
 
    between_inside
    from_outside
-   network
