@@ -10,7 +10,9 @@ Welcome to Learning Notebook's documentation!
    :maxdepth: 2
    :caption: Linux Common Service:
 
+   linux/services/kubernetes/kubernetes
    linux/services/nginx/nginx
+
 
 .. toctree::
    :maxdepth: 2
