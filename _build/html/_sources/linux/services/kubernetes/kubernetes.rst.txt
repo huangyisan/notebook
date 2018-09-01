@@ -8,7 +8,8 @@ Kubernetes
    :maxdepth: 1
 
    communicate/index
-   controllers/controller
+   controllers/index
    nodes/index
    pods/index
    services/index
+   db/index

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>master &mdash; Learning Notebook v1.0 documentation</title>
+  <title>db &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Node" href="node.html" />
-    <link rel="prev" title="nodes" href="index.html" /> 
+    <link rel="next" title="etcd" href="etcd.html" />
+    <link rel="prev" title="service" href="../services/service.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -83,14 +83,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">k8s的网络通信</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">nodes</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">master</a></li>
-<li class="toctree-l3"><a class="reference internal" href="node.html">Node</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">db</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="etcd.html">etcd</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -165,15 +164,13 @@
         
           <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
         
-          <li><a href="index.html">nodes</a> &raquo;</li>
-        
-      <li>master</li>
+      <li>db</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/nodes/master.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/db/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -186,12 +183,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="master">
-<h1>master<a class="headerlink" href="#master" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>master三大组件：Api server, Scheduler, Controller-Manager。</li>
-<li>master在集群中一般为三台。</li>
+  <div class="section" id="db">
+<h1>db<a class="headerlink" href="#db" title="Permalink to this headline">¶</a></h1>
+<p><strong>用于存放k8s集群信息</strong></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="etcd.html">etcd</a></li>
 </ul>
+</div>
 </div>
 
 
@@ -202,10 +201,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="node.html" class="btn btn-neutral float-right" title="Node" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="etcd.html" class="btn btn-neutral float-right" title="etcd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="nodes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../services/service.html" class="btn btn-neutral" title="service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
