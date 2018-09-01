@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>内部请求流量的交互 &mdash; Learning Notebook v1.0 documentation</title>
+  <title>yaml &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="外部请求流量的交互" href="from_outside.html" />
-    <link rel="prev" title="network communication" href="index.html" /> 
+    <link rel="next" title="common grammar" href="common_grammar.html" />
+    <link rel="prev" title="etcd" href="../db/etcd.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -81,22 +81,16 @@
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">network communication</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">内部请求流量的交互</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pod">1、同一个pod中的容器交互</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">2、pod之间的容器交互</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#podservice">3、pod和service的交互</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="from_outside.html">外部请求流量的交互</a></li>
-<li class="toctree-l3"><a class="reference internal" href="flannel.html">flannel</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">network communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">yaml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="common_grammar.html">common grammar</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -171,15 +165,13 @@
         
           <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
         
-          <li><a href="index.html">network communication</a> &raquo;</li>
-        
-      <li>内部请求流量的交互</li>
+      <li>yaml</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/communicate/between_inside.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/yaml/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -192,41 +184,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="id1">
-<h1>内部请求流量的交互<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="pod">
-<h2>1、同一个pod中的容器交互<a class="headerlink" href="#pod" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>因为同一个pod内的容器存在NET共享，所以相互之间交互通过localhost</li>
+  <div class="section" id="yaml">
+<h1>yaml<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h1>
+<p><strong>用于定义k8s的资源清单，apiserver自动将其转换为json格式，然后再提交</strong></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="common_grammar.html">common grammar</a></li>
 </ul>
-<p>如下图所示:</p>
-<img alt="../../../../_images/between_inside1.png" src="../../../../_images/between_inside1.png" />
-</div>
-<div class="section" id="id2">
-<h2>2、pod之间的容器交互<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p><strong>该内容是描述容器的交互</strong></p>
-<div class="section" id="podnode">
-<h3>2.1、两个pod在同一个node节点上<a class="headerlink" href="#podnode" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>通过docker0互连容器，直接访问。</li>
-</ul>
-</div>
-<div class="section" id="id3">
-<h3>2.2、两个pod在不同一个node节点上<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>这些pod其实都处于同一个网段。</li>
-<li>通过 <code class="docutils literal notranslate"><span class="pre">overlay</span> <span class="pre">network(叠加网络)</span></code> ，隧道的方式，通过转发二层报文，让处于不同节点的pod能够通信。比如使用flannel。</li>
-</ul>
-</div>
-</div>
-<div class="section" id="podservice">
-<h2>3、pod和service的交互<a class="headerlink" href="#podservice" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>service的地址是iptables或者ipvs的规则。</li>
-<li>pod只需要将请求报文发往当前宿主机的网关，则网关就可以根据iptables规则进行转发。</li>
-</ul>
-<p>如下图所示:</p>
-<img alt="../../../../_images/between_inside.png" src="../../../../_images/between_inside.png" />
 </div>
 </div>
 
@@ -238,10 +202,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="from_outside.html" class="btn btn-neutral float-right" title="外部请求流量的交互" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="common_grammar.html" class="btn btn-neutral float-right" title="common grammar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="network communication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../db/etcd.html" class="btn btn-neutral" title="etcd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

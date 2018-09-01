@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>common grammar &mdash; Learning Notebook v1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Learning Notebook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes.html">Kubernetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux System:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../system/logrotate.html">logrotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../system/ulimit.html">ulimit</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Language Basis:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/basis/basis.html">Python Basis</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/modules/build-in/build-in_modules.html">Python Build-In Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/modules/external/external_modules.html">Python External Module</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python Magic Method:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/method/magic_method/magic_method.html">Python Magic Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/method/general_method/general_method.html">Python General Method</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Protocol:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../protocol/http/http.html">Http Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../protocol/https/https.html">Https Protocol</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Learning Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>common grammar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/linux/services/kubernetes/yaml/common_ grammar.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="common-grammar">
+<h1>common grammar<a class="headerlink" href="#common-grammar" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="yaml">
+<h2>1、yaml写法特点<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>大小写敏感。</li>
+<li>使用缩进表示层级关系。</li>
+<li>缩进时不允许使用Tal键，只允许使用空格。</li>
+<li>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可。</li>
+<li>”#” 表示注释，从这个字符一直到行尾，都会被解析器忽略。</li>
+<li>k8s中的yaml数据格式只有list和map。</li>
+</ul>
+</div>
+<div class="section" id="key-value">
+<h2>2、常见key: value<a class="headerlink" href="#key-value" title="Permalink to this headline">¶</a></h2>
+<p><strong>可以使用</strong> <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source.$key1.$key2</span></code> <strong>来查看具体的用法和含义。</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@k8s_master</span> <span class="o">~</span><span class="p">]</span><span class="c1"># kubectl explain pod.kind</span>
+<span class="n">KIND</span><span class="p">:</span>     <span class="n">Pod</span>
+<span class="n">VERSION</span><span class="p">:</span>  <span class="n">v1</span>
+
+<span class="n">FIELD</span><span class="p">:</span>    <span class="n">kind</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>
+
+<span class="n">DESCRIPTION</span><span class="p">:</span>
+     <span class="n">Kind</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">string</span> <span class="n">value</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">REST</span> <span class="n">resource</span> <span class="n">this</span> <span class="nb">object</span>
+     <span class="n">represents</span><span class="o">.</span> <span class="n">Servers</span> <span class="n">may</span> <span class="n">infer</span> <span class="n">this</span> <span class="kn">from</span> <span class="nn">the</span> <span class="nn">endpoint</span> <span class="nn">the</span> <span class="nn">client</span> <span class="nn">submits</span>
+     <span class="n">requests</span> <span class="n">to</span><span class="o">.</span> <span class="n">Cannot</span> <span class="n">be</span> <span class="n">updated</span><span class="o">.</span> <span class="n">In</span> <span class="n">CamelCase</span><span class="o">.</span> <span class="n">More</span> <span class="n">info</span><span class="p">:</span>
+     <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">community</span><span class="o">/</span><span class="n">contributors</span><span class="o">/</span><span class="n">devel</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">conventions</span><span class="o">.</span><span class="n">md</span><span class="c1">#types-kinds</span>
+</pre></div>
+</div>
+<div class="section" id="apiversion">
+<h3>2.1、apiVersion<a class="headerlink" href="#apiversion" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>写法为apiVersion: $GROUP_NAME/$VERSION，如果$GROUP_NAME为core，则可以省略。</li>
+<li>不同k8s版本以及不同资源是对应不同apiVersion的。</li>
+<li>可以通过命令 <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source</span></code> 查看当前版本的资源应该选择何种apiVersion</li>
+</ul>
+<div class="line-block">
+<div class="line">参考：</div>
+<div class="line"><a class="reference external" href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/">https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/</a></div>
+<div class="line"><a class="reference external" href="https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html">https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html</a></div>
+</div>
+</div>
+<div class="section" id="kind">
+<h3>2.2、kind<a class="headerlink" href="#kind" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>表示资源类型。</li>
+</ul>
+</div>
+<div class="section" id="metadata">
+<h3>2.3、metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>表示资源的元数据。</li>
+<li>metadata下还有更多的嵌套数据。</li>
+</ul>
+</div>
+<div class="section" id="spec">
+<h3>2.4、spec<a class="headerlink" href="#spec" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>定义资源规格，目标期望状态。</li>
+<li>spec下还有更多的嵌套数据。</li>
+</ul>
+</div>
+<div class="section" id="status">
+<h3>2.5、status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>只读，显示当前状态。</li>
+<li>status的状态会无限趋近spec定义的目标期望状态。</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, huangyisan.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'v1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

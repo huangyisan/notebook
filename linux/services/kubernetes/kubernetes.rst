@@ -4,6 +4,8 @@ Kubernetes
 
 `官方文档 <https://kubernetes.io/docs/concepts/>`_
 
+**version 1.11**
+
 .. toctree::
    :maxdepth: 1
 
@@ -13,3 +15,4 @@ Kubernetes
    pods/index
    services/index
    db/index
+   yaml/index
