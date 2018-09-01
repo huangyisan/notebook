@@ -81,8 +81,8 @@
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">k8s的网络通信</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">network communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">nodes</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="master.html">master</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Node</a><ul>
@@ -94,6 +94,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -212,7 +213,7 @@
 </ul>
 <p>3、kube-proxy</p>
 <ul class="simple">
-<li>与master的Api server通信，当Api server有内容变化的时候，则下发通知给kube-proxy，kube-proxy则将变化的内容进行具体反应，比如改变iptables表项。</li>
+<li>与master的Api server通信，当Api server有内容变化的时候，则下发通知给kube-proxy，kube-proxy则将变化的内容进行具体反馈执行，比如改变iptables表项。</li>
 </ul>
 </div>
 </div>
