@@ -13,3 +13,4 @@ network communication
 
    between_inside
    from_outside
+   flannel

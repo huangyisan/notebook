@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>network communication &mdash; Learning Notebook v1.0 documentation</title>
+  <title>flannel &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -27,9 +27,7 @@
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="内部请求流量的交互" href="between_inside.html" />
-    <link rel="prev" title="Kubernetes" href="../kubernetes.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -79,21 +77,8 @@
             
             
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">network communication</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="between_inside.html">内部请求流量的交互</a></li>
-<li class="toctree-l3"><a class="reference internal" href="from_outside.html">外部请求流量的交互</a></li>
-<li class="toctree-l3"><a class="reference internal" href="flannel.html">flannel</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes.html">Kubernetes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Linux System:</span></p>
@@ -164,15 +149,13 @@
     
       <li><a href="../../../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
-        
-      <li>network communication</li>
+      <li>flannel</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/communicate/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/communicate/flannel.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -185,21 +168,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="network-communication">
-<h1>network communication<a class="headerlink" href="#network-communication" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="flannel">
+<h1>flannel<a class="headerlink" href="#flannel" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>node属于一个网络。称之为 <code class="docutils literal notranslate"><span class="pre">节点网络</span></code> 。</li>
-<li>service属于一个网络，处于iptables。称之为 <code class="docutils literal notranslate"><span class="pre">集群网络</span></code> 。</li>
-<li>pod属于一个网络。称之为 <code class="docutils literal notranslate"><span class="pre">pod网络</span></code> 。</li>
+<li>给pod和service提供IP地址。</li>
+<li>提供网络策略，pod访问隔离等功能。</li>
+<li>不同节点上的容器能够获得“同属一个内网”且”不重复的”IP地址，并让属于不同节点上的容器能够直接通过内网IP通信。</li>
 </ul>
-<p><strong>重点</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="between_inside.html">内部请求流量的交互</a></li>
-<li class="toctree-l1"><a class="reference internal" href="from_outside.html">外部请求流量的交互</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flannel.html">flannel</a></li>
-</ul>
-</div>
 </div>
 
 
@@ -207,15 +182,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="between_inside.html" class="btn btn-neutral float-right" title="内部请求流量的交互" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../kubernetes.html" class="btn btn-neutral" title="Kubernetes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
