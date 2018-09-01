@@ -22,3 +22,7 @@ Node
 2、容器引擎
 
 * docker，或者其他的容器引擎。
+
+3、kube-proxy
+
+* 与master的Api server通信，当Api server有内容变化的时候，则下发通知给kube-proxy，kube-proxy则将变化的内容进行具体反应，比如改变iptables表项。
