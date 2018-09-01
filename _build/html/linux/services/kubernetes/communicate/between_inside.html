@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="外部请求流量的交互" href="from_outside.html" />
+    <link rel="prev" title="Communicate Principle" href="index.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -77,8 +79,24 @@
             
             
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../kubernetes.html">Kubernetes</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Communicate Principle</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">内部请求流量的交互</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pod">1、同一个pod中的容器交互</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">2、跨pod的容器交互</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="from_outside.html">外部请求流量的交互</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network.html">k8s的内部网络</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Linux System:</span></p>
@@ -149,6 +167,10 @@
     
       <li><a href="../../../../index.html">Docs</a> &raquo;</li>
         
+          <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
+        
+          <li><a href="index.html">Communicate Principle</a> &raquo;</li>
+        
       <li>内部请求流量的交互</li>
     
     
@@ -175,12 +197,16 @@
 <ul class="simple">
 <li>因为同一个pod内的容器存在NET共享，所以相互之间交互通过localhost</li>
 </ul>
+<p>如下图所示；</p>
+<img alt="linux/services/kubernetes/communicate/./images/between_inside1.png" src="linux/services/kubernetes/communicate/./images/between_inside1.png" />
 </div>
 <div class="section" id="id2">
 <h2>2、跨pod的容器交互<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li></li>
 </ul>
+<p>如下图所示，b1的pod访问a1的pod：</p>
+<img alt="../../../../_images/between_inside.png" src="../../../../_images/between_inside.png" />
 </div>
 </div>
 
@@ -189,6 +215,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="from_outside.html" class="btn btn-neutral float-right" title="外部请求流量的交互" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Communicate Principle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

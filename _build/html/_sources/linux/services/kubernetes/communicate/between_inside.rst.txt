@@ -9,8 +9,16 @@
 
 * 因为同一个pod内的容器存在NET共享，所以相互之间交互通过localhost
 
+如下图所示；
+
+.. image:: ./images/between_inside1.png
+
 -------------------------
 2、跨pod的容器交互
 -------------------------
 
 *
+
+如下图所示，b1的pod访问a1的pod：
+
+.. image:: ./images/between_inside.png
