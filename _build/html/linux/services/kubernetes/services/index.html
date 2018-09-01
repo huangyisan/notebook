@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>controller &mdash; Learning Notebook v1.0 documentation</title>
+  <title>services &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -27,9 +27,7 @@
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="CronJob" href="CronJob.html" />
-    <link rel="prev" title="Pod" href="../pods/pod.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -79,21 +77,8 @@
             
             
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">controller</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="CronJob.html">CronJob</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DaemonSet.html">DaemonSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Deployment.html">Deployment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="HPA.html">HPA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Job.html">Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="StatefulSet.html">StatefulSet</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes.html">Kubernetes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Linux System:</span></p>
@@ -164,15 +149,13 @@
     
       <li><a href="../../../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
-        
-      <li>controller</li>
+      <li>services</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/controllers/controller.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/services/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -185,18 +168,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="controller">
-<h1>controller<a class="headerlink" href="#controller" title="Permalink to this headline">¶</a></h1>
-<p><strong>不同环境和需求会采用不同的controller。</strong></p>
-<p><strong>controller主要用于控制pod资源，来达到预设的期望。</strong></p>
+  <div class="section" id="services">
+<h1>services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h1>
+<p>Pod因为存在生命周期，所以其时刻都可能生成或者销毁，pod的ip也会随之发生改变。此时frontend无法通过固定的ip和port直接访问pod,需要依赖service做请求调度，调度给后端的一组pod。</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="CronJob.html">CronJob</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DaemonSet.html">DaemonSet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Deployment.html">Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HPA.html">HPA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Job.html">Job</a></li>
-<li class="toctree-l1"><a class="reference internal" href="StatefulSet.html">StatefulSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service.html">service</a></li>
 </ul>
 </div>
 </div>
@@ -206,15 +183,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="CronJob.html" class="btn btn-neutral float-right" title="CronJob" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../pods/pod.html" class="btn btn-neutral" title="Pod" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

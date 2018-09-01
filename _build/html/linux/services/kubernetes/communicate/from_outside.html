@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>controller &mdash; Learning Notebook v1.0 documentation</title>
+  <title>外部请求流量的交互 &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="CronJob" href="CronJob.html" />
-    <link rel="prev" title="Pod" href="../pods/pod.html" /> 
+    <link rel="next" title="controller" href="../controllers/controller.html" />
+    <link rel="prev" title="内部请求流量的交互" href="between_inside.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -81,17 +81,15 @@
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">controller</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="CronJob.html">CronJob</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DaemonSet.html">DaemonSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Deployment.html">Deployment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="HPA.html">HPA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Job.html">Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="StatefulSet.html">StatefulSet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Communicate Principle</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="between_inside.html">内部请求流量的交互</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">外部请求流量的交互</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../controllers/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -166,13 +164,15 @@
         
           <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
         
-      <li>controller</li>
+          <li><a href="index.html">Communicate Principle</a> &raquo;</li>
+        
+      <li>外部请求流量的交互</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/controllers/controller.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/communicate/from_outside.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -185,20 +185,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="controller">
-<h1>controller<a class="headerlink" href="#controller" title="Permalink to this headline">¶</a></h1>
-<p><strong>不同环境和需求会采用不同的controller。</strong></p>
-<p><strong>controller主要用于控制pod资源，来达到预设的期望。</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="CronJob.html">CronJob</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DaemonSet.html">DaemonSet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Deployment.html">Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HPA.html">HPA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Job.html">Job</a></li>
-<li class="toctree-l1"><a class="reference internal" href="StatefulSet.html">StatefulSet</a></li>
-</ul>
-</div>
+  <div class="section" id="id1">
+<h1>外部请求流量的交互<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><strong>流程：</strong></p>
+<p>1、用户访问先抵达node节点的ip，也就是物理机或者虚拟机的ip。</p>
+<p>2、然后该node节点将请求转发给 <code class="docutils literal notranslate"><span class="pre">service</span></code> 。</p>
+<p>3、接着由 <code class="docutils literal notranslate"><span class="pre">service</span></code> 将请求转发给 <code class="docutils literal notranslate"><span class="pre">pod</span></code> 中的服务。</p>
+<p>如下图所示：</p>
+<img alt="../../../../_images/from_outside.png" src="../../../../_images/from_outside.png" />
 </div>
 
 
@@ -209,10 +203,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="CronJob.html" class="btn btn-neutral float-right" title="CronJob" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../controllers/controller.html" class="btn btn-neutral float-right" title="controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../pods/pod.html" class="btn btn-neutral" title="Pod" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="between_inside.html" class="btn btn-neutral" title="内部请求流量的交互" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

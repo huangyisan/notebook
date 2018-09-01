@@ -7,7 +7,8 @@ Kubernetes
 .. toctree::
    :maxdepth: 1
 
-
+   communicate/index
+   controllers/controller
    nodes/index
    pods/index
-   controllers/controller
+   services/index
