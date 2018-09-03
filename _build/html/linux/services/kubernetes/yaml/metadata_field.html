@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../FAQ.html">Pod FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -211,11 +212,12 @@
 </div>
 <div class="section" id="labels">
 <h2>labels<a class="headerlink" href="#labels" title="Permalink to this headline">¶</a></h2>
-<p>定义资源的标签，可以被selector（标签选择器）等进行匹配选择。</p>
+<p>定义资源的标签，可以存在多个，可以被selector（标签选择器）等进行匹配选择。</p>
+<p>key=value定义；key必须为数字、字母或者下划线开头；value可以为空，只能字母或者数字开头以及结尾。</p>
 </div>
 <div class="section" id="annotation">
 <h2>annotation<a class="headerlink" href="#annotation" title="Permalink to this headline">¶</a></h2>
-<p>定义资源注解。</p>
+<p>与label不同的是，annotation不能用于挑选资源对象，仅用于为对象提供”元数据”。</p>
 </div>
 </div>
 

@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../FAQ.html">Pod FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -203,27 +204,85 @@
 <ul class="simple">
 <li>定义属于当前pod的container。</li>
 <li>多个container用list方式定义。用 <code class="docutils literal notranslate"><span class="pre">-</span></code> 。</li>
-<li>不可以被更新。</li>
 </ul>
 <dl class="docutils">
 <dt>containers下的field:</dt>
-<dd><ul class="first last simple">
-<li>name 表示container的名称。</li>
-<li>image 表示该container使用的镜像。</li>
+<dd><ul class="first last">
+<li><p class="first">name 表示container的名称。</p>
+</li>
+<li><p class="first">image 表示该container使用的镜像。</p>
+</li>
 <li><dl class="first docutils">
 <dt>imagePullPolicy 表示镜像获取策略。</dt>
-<dd><ul class="first last">
-<li>默认值为Always，表示总是去镜像仓库下载。</li>
-<li>Never, 本地有就用，没有就不下载，也不进行后续处理。</li>
-<li>IfNotPresent, 本地有就使用，如果没有则去镜像仓库下载。</li>
+<dd><ul class="first last simple">
+<li>如果镜像标签为latest，则默认值为 <code class="docutils literal notranslate"><span class="pre">Always</span></code> ，表示总是去镜像仓库下载。</li>
+<li><code class="docutils literal notranslate"><span class="pre">Never</span></code> , 本地有就用，没有就不下载，也不进行后续处理。</li>
+<li><code class="docutils literal notranslate"><span class="pre">IfNotPresent</span></code> , 本地有就使用，如果没有则去镜像仓库下载。</li>
 </ul>
 </dd>
 </dl>
 </li>
-<li>command 表示当启用该镜像的时候，同时需要执行的命令。</li>
+<li><dl class="first docutils">
+<dt>command 表示当启用该镜像的时候，同时需要执行的命令, 将忽略镜像中的entrypoint和cmd。</dt>
+<dd><ul class="first last">
+<li><p class="first">类似dockerfile中的entrypoint。</p>
+</li>
+<li><p class="first">如果没有指定command，镜像中存在entrypoint，则镜像启动的时候执行entrypoint。</p>
+</li>
+<li><dl class="first docutils">
+<dt>他不会运行在shell中，所以如果要用shell运行，则需要指定”/bin/sh”。</dt>
+<dd><ul class="first last">
+<li><div class="first highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">command</span><span class="p">:</span>
+<span class="o">-</span> <span class="s2">&quot;/bin/sh&quot;</span>
+<span class="o">-</span> <span class="s2">&quot;-c&quot;</span>
+<span class="o">-</span> <span class="s2">&quot;echo hello&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </dd>
 </dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>args 表示启用镜像的时候，传递给程序的参数。(ps: dockerfile中，如果只有cmd，则运行cmd，如果entrypoint和cmd共存，则cmd作为参数传递给entrypoint。)</dt>
+<dd><ul class="first last simple">
+<li>默认如果不提供args，则镜像中的cmd作为参数传递给镜像中的entrypoint。</li>
+<li>如果指定了args，则args将取代cmd，作为参数传递给镜像中的entrypoint。</li>
+<li>args中若要定义变量，则使用$(VAR_NAME)。变量逃逸，$$(VAR_NAME)。</li>
+<li><a class="reference external" href="https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#notes">command args的情况参考官方文档。</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ports 表示容器内需要暴露出去的端口，可以多个，用list方式。 <cite>这定义仅仅是信息性的定义，具体暴露哪个端口还是看容器镜像</cite>。</dt>
+<dd><ul class="first last simple">
+<li>containerPort: 信息性定义容器端口。</li>
+<li>name: 信息性定义端口含义。</li>
+<li>protocol: 没有定义则默认为tcp。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="nodeselector">
+<h3>nodeSelector<a class="headerlink" href="#nodeselector" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>pod将倾向运行在包含这些label的node上。</li>
+</ul>
+</div>
+<div class="section" id="nodename">
+<h3>nodeName<a class="headerlink" href="#nodename" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>pod运行在指定nodename的节点上。</li>
+</ul>
 </div>
 </div>
 </div>

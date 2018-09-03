@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../FAQ.html">Pod FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -190,7 +191,7 @@
   <div class="section" id="yaml">
 <h1>yaml<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h1>
 <p><strong>用于定义k8s的资源清单，apiserver自动将其转换为json格式，然后再提交</strong></p>
-<p><strong>可以使用</strong> <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source.$key1.$key2</span></code> <strong>来查看具体的用法和含义，资源对象若包含了</strong> <code class="docutils literal notranslate"><span class="pre">-required-</span></code> <strong>则表示必须存在的字段。</strong></p>
+<p><strong>可以使用</strong> <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source.$key1.$key2</span></code> <strong>来查看具体的用法和含义，资源对象若包含了</strong> <code class="docutils literal notranslate"><span class="pre">-required-</span></code> <strong>则表示必须存在的字段。若字段存在</strong> <code class="docutils literal notranslate"><span class="pre">cannot</span> <span class="pre">be</span> <span class="pre">update</span></code> <strong>则表示不支持热更新</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@k8s_master</span> <span class="o">~</span><span class="p">]</span><span class="c1"># kubectl explain pod.kind</span>
 <span class="n">KIND</span><span class="p">:</span>     <span class="n">Pod</span>
 <span class="n">VERSION</span><span class="p">:</span>  <span class="n">v1</span>
@@ -201,7 +202,7 @@
      <span class="n">Kind</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">string</span> <span class="n">value</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">REST</span> <span class="n">resource</span> <span class="n">this</span> <span class="nb">object</span>
      <span class="n">represents</span><span class="o">.</span> <span class="n">Servers</span> <span class="n">may</span> <span class="n">infer</span> <span class="n">this</span> <span class="kn">from</span> <span class="nn">the</span> <span class="nn">endpoint</span> <span class="nn">the</span> <span class="nn">client</span> <span class="nn">submits</span>
      <span class="n">requests</span> <span class="n">to</span><span class="o">.</span> <span class="n">Cannot</span> <span class="n">be</span> <span class="n">updated</span><span class="o">.</span> <span class="n">In</span> <span class="n">CamelCase</span><span class="o">.</span> <span class="n">More</span> <span class="n">info</span><span class="p">:</span>
-     <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">community</span><span class="o">/</span><span class="n">contributors</span><span class="o">/</span><span class="n">devel</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">conventions</span><span class="o">.</span><span class="n">md</span><span class="c1">#types-kinds</span>
+     <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">community</span><span class="o">/</span><span class="n">contributors</span><span class="o">/</span><span class="n">devel</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">conventions</span><span class="o">.</span><span class="n">md</span>
 </pre></div>
 </div>
 <ul class="simple">

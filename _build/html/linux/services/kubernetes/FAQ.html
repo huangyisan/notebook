@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Kubernetes &mdash; Learning Notebook v1.0 documentation</title>
+  <title>FAQ &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="network communication" href="communicate/index.html" />
-    <link rel="prev" title="Welcome to Learning Notebook’s documentation!" href="../../../index.html" /> 
+    <link rel="next" title="Nginx" href="../nginx/nginx.html" />
+    <link rel="prev" title="status field" href="yaml/status_field.html" /> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -80,7 +80,7 @@
             
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Kubernetes</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="kubernetes.html">Kubernetes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="communicate/index.html">network communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/index.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nodes/index.html">nodes</a></li>
@@ -88,7 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="services/index.html">services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="db/index.html">db</a></li>
 <li class="toctree-l2"><a class="reference internal" href="yaml/index.html">yaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../nginx/nginx.html">Nginx</a></li>
@@ -161,13 +161,15 @@
     
       <li><a href="../../../index.html">Docs</a> &raquo;</li>
         
-      <li>Kubernetes</li>
+          <li><a href="kubernetes.html">Kubernetes</a> &raquo;</li>
+        
+      <li>FAQ</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/linux/services/kubernetes/kubernetes.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/linux/services/kubernetes/FAQ.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,21 +182,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kubernetes">
-<h1>Kubernetes<a class="headerlink" href="#kubernetes" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://kubernetes.io/docs/concepts/">官方文档</a></p>
-<p><strong>version 1.11</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="communicate/index.html">network communication</a></li>
-<li class="toctree-l1"><a class="reference internal" href="controllers/index.html">controller</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nodes/index.html">nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pods/index.html">pods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/index.html">services</a></li>
-<li class="toctree-l1"><a class="reference internal" href="db/index.html">db</a></li>
-<li class="toctree-l1"><a class="reference internal" href="yaml/index.html">yaml</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
-</ul>
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">1、如何查看pod中某个container的日志？</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl logs $pod_name $container_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">2、如何连接进入pod中某个container？</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl exec -it $pod_name -c $container_name  -- /bin/sh
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">3、查看pod资源标签，以及过滤标签</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl get pods --show-labels
+kubectl get pods -l $labels_string1, $labels_string2 --show-labels
+kubectl get pods -l &quot;$key in ($value1,$value2,$value3)&quot;
+kubectl get pods -l &quot;$key notin ($value1,$value2,$value3)&quot;
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">4、给资源打标签</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl label $resource $resource_name $key=$value
+强行覆盖打标签，--overwrite
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">5、查看资源的annotation注解</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl describe $resource $resource_name
+</pre></div>
 </div>
 </div>
 
@@ -206,10 +228,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="communicate/index.html" class="btn btn-neutral float-right" title="network communication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../nginx/nginx.html" class="btn btn-neutral float-right" title="Nginx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../../../index.html" class="btn btn-neutral" title="Welcome to Learning Notebook’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="yaml/status_field.html" class="btn btn-neutral" title="status field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

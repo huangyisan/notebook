@@ -16,3 +16,4 @@ Kubernetes
    services/index
    db/index
    yaml/index
+   FAQ

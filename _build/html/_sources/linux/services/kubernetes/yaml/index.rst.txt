@@ -4,7 +4,7 @@ yaml
 
 **用于定义k8s的资源清单，apiserver自动将其转换为json格式，然后再提交**
 
-**可以使用** ``kubectl explain $source.$key1.$key2`` **来查看具体的用法和含义，资源对象若包含了** ``-required-`` **则表示必须存在的字段。**
+**可以使用** ``kubectl explain $source.$key1.$key2`` **来查看具体的用法和含义，资源对象若包含了** ``-required-`` **则表示必须存在的字段。若字段存在** ``cannot be update`` **则表示不支持热更新**
 
 .. code-block:: python
 
@@ -18,7 +18,7 @@ yaml
          Kind is a string value representing the REST resource this object
          represents. Servers may infer this from the endpoint the client submits
          requests to. Cannot be updated. In CamelCase. More info:
-         https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+         https://git.k8s.io/community/contributors/devel/api-conventions.md
 
 * 大小写敏感。
 * 使用缩进表示层级关系。

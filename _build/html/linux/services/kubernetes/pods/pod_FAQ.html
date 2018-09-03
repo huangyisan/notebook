@@ -192,11 +192,29 @@
 <h1>Pod FAQ<a class="headerlink" href="#pod-faq" title="Permalink to this headline">¶</a></h1>
 <div class="line-block">
 <div class="line">1、如何查看pod中某个container的日志？</div>
-<div class="line">kubectl logs $pod_name $container_name</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl logs $pod_name $container_name
+</pre></div>
 </div>
 <div class="line-block">
 <div class="line">2、如何连接进入pod中某个container？</div>
-<div class="line">kubectl exec -it $pod_name -c $container_name  – /bin/sh</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl exec -it $pod_name -c $container_name  -- /bin/sh
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">3、查看资源标签，以及过滤标签</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl get pods --show-labels
+kubectl get pods -l $labels_string1, $labels_string2 --show-labels
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">4、给pod资源打标签</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl label pods $pod_name $key=$value
+强行覆盖打标签，--overwrite
+</pre></div>
 </div>
 </div>
 

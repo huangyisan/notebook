@@ -9,4 +9,3 @@ pods
 
    pod
    pod_spec_field
-   pod_FAQ
