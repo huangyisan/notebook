@@ -97,7 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../FAQ.html">Pod FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -283,6 +283,21 @@
 <ul class="simple">
 <li>pod运行在指定nodename的节点上。</li>
 </ul>
+</div>
+<div class="section" id="restartpolicy">
+<h3>restartPolicy<a class="headerlink" href="#restartpolicy" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>表示当pod挂了重启的策略。</li>
+</ul>
+<dl class="docutils">
+<dt>restartPolicy的参数：</dt>
+<dd><ul class="first last simple">
+<li>Always，一旦容器挂了，就重启，总是重启。默认为Always。</li>
+<li>OnFailure，状态为错误的时候才会重启，正常关闭容器不会重启。</li>
+<li>Never，从不重启容器。</li>
+</ul>
+</dd>
+</dl>
 </div>
 </div>
 </div>

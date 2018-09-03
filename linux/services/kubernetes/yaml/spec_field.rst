@@ -58,4 +58,13 @@ nodeName
 
 * pod运行在指定nodename的节点上。
 
+^^^^^^^^^^^^^^^^^
+restartPolicy
+^^^^^^^^^^^^^^^^^
 
+* 表示当pod挂了重启的策略。
+
+restartPolicy的参数：
+    * Always，一旦容器挂了，就重启，总是重启。默认为Always。
+    * OnFailure，状态为错误的时候才会重启，正常关闭容器不会重启。
+    * Never，从不重启容器。
