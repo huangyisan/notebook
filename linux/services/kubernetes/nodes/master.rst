@@ -1,5 +1,5 @@
 ========================
-master
+Master
 ========================
 
 * master三大组件：Api server, Scheduler, Controller-Manager。

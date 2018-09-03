@@ -31,3 +31,4 @@ yaml
    :maxdepth: 1
 
    5_important_field
+   metadata_field

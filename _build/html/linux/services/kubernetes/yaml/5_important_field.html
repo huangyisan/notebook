@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Nginx" href="../../nginx/nginx.html" />
+    <link rel="next" title="metadata field" href="metadata_field.html" />
     <link rel="prev" title="yaml" href="index.html" /> 
 
   
@@ -96,6 +96,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#status">5、status</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
 </ul>
 </li>
 </ul>
@@ -195,12 +196,14 @@
             
   <div class="section" id="five-important-yaml-field">
 <h1>five important yaml field<a class="headerlink" href="#five-important-yaml-field" title="Permalink to this headline">¶</a></h1>
+<p><strong>这五个最基本的字段一般都会被定义在yaml资源清单里</strong></p>
 <div class="section" id="apiversion">
 <h2>1、apiVersion<a class="headerlink" href="#apiversion" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>写法为apiVersion: $GROUP_NAME/$VERSION，如果$GROUP_NAME为core，则可以省略。</li>
 <li>不同k8s版本以及不同资源是对应不同apiVersion的。</li>
-<li>可以通过命令 <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source</span></code> 查看当前版本的资源应该选择何种apiVersion</li>
+<li>可以通过命令 <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source</span></code> 查看当前版本的资源应该选择何种apiVersion。</li>
+<li>可以通过命令 <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">api-versions</span></code> 查看当前全部的可用apiVersion。</li>
 </ul>
 <div class="line-block">
 <div class="line">参考：</div>
@@ -220,6 +223,8 @@
 <li>表示资源的元数据。</li>
 <li>metadata下还有更多的嵌套数据。</li>
 </ul>
+<p>To:
+<a class="reference internal" href="metadata_field.html"><span class="doc">metadata嵌套数据</span></a></p>
 </div>
 <div class="section" id="spec">
 <h2>4、spec<a class="headerlink" href="#spec" title="Permalink to this headline">¶</a></h2>
@@ -245,7 +250,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../nginx/nginx.html" class="btn btn-neutral float-right" title="Nginx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metadata_field.html" class="btn btn-neutral float-right" title="metadata field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="yaml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
