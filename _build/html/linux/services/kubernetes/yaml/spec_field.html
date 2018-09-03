@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Master &mdash; Learning Notebook v1.0 documentation</title>
+  <title>spec field &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Node" href="node.html" />
-    <link rel="prev" title="nodes" href="index.html" /> 
+    <link rel="next" title="status field" href="status_field.html" />
+    <link rel="prev" title="metadata field" href="metadata_field.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -83,15 +83,20 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">network communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">nodes</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Master</a></li>
-<li class="toctree-l3"><a class="reference internal" href="node.html">Node</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../yaml/index.html">yaml</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">yaml</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="5_important_field.html">five important yaml field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">spec field</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pod">pod资源类型</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
@@ -166,15 +171,15 @@
         
           <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
         
-          <li><a href="index.html">nodes</a> &raquo;</li>
+          <li><a href="index.html">yaml</a> &raquo;</li>
         
-      <li>Master</li>
+      <li>spec field</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/nodes/master.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/yaml/spec_field.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -187,12 +192,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="master">
-<h1>Master<a class="headerlink" href="#master" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="spec-field">
+<h1>spec field<a class="headerlink" href="#spec-field" title="Permalink to this headline">¶</a></h1>
+<p><strong>不同的资源，spec字段不尽相同，用于定义资源规格，代表了对资源状态的期望</strong></p>
+<div class="section" id="pod">
+<h2>pod资源类型<a class="headerlink" href="#pod" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="containers">
+<h3>containers<a class="headerlink" href="#containers" title="Permalink to this headline">¶</a></h3>
+<p><strong>pod spec中必须存在的字段</strong></p>
 <ul class="simple">
-<li>master三大组件：Api server, Scheduler, Controller-Manager。</li>
-<li>master在集群中一般为三台。</li>
+<li>定义属于当前pod的container。</li>
+<li>多个container用list方式定义。用 <code class="docutils literal notranslate"><span class="pre">-</span></code> 。</li>
+<li>不可以被更新。</li>
 </ul>
+<dl class="docutils">
+<dt>containers下的field:</dt>
+<dd><ul class="first last simple">
+<li>name 表示container的名称。</li>
+<li>image 表示该container使用的镜像。</li>
+<li><dl class="first docutils">
+<dt>imagePullPolicy 表示镜像获取策略。</dt>
+<dd><ul class="first last">
+<li>默认值为Always，表示总是去镜像仓库下载。</li>
+<li>Never, 本地有就用，没有就不下载，也不进行后续处理。</li>
+<li>IfNotPresent, 本地有就使用，如果没有则去镜像仓库下载。</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>command 表示当启用该镜像的时候，同时需要执行的命令。</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 
 
@@ -203,10 +236,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="node.html" class="btn btn-neutral float-right" title="Node" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="status_field.html" class="btn btn-neutral float-right" title="status field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="nodes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="metadata_field.html" class="btn btn-neutral" title="metadata field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

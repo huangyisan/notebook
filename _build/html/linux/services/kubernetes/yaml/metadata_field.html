@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Nginx" href="../../nginx/nginx.html" />
+    <link rel="next" title="spec field" href="spec_field.html" />
     <link rel="prev" title="five important yaml field" href="5_important_field.html" /> 
 
   
@@ -89,7 +89,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">yaml</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="5_important_field.html">five important yaml field</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">metadata field</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">metadata field</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#name">name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#namespace">namespace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labels">labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#annotation">annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spec_field.html">spec field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
 </ul>
 </li>
 </ul>
@@ -190,6 +198,25 @@
   <div class="section" id="metadata-field">
 <h1>metadata field<a class="headerlink" href="#metadata-field" title="Permalink to this headline">¶</a></h1>
 <p><strong>表示资源的元数据。</strong></p>
+<p>嵌套字段如下：</p>
+<div class="section" id="name">
+<h2>name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
+<p>在同一个namespace中必须保持唯一</p>
+</div>
+<div class="section" id="namespace">
+<h2>namespace<a class="headerlink" href="#namespace" title="Permalink to this headline">¶</a></h2>
+<p>资源对象所属的namespace</p>
+<p>如果为空则为default</p>
+<p>查看当前集群namespace <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">get</span> <span class="pre">namespace</span></code></p>
+</div>
+<div class="section" id="labels">
+<h2>labels<a class="headerlink" href="#labels" title="Permalink to this headline">¶</a></h2>
+<p>定义资源的标签，可以被selector（标签选择器）等进行匹配选择。</p>
+</div>
+<div class="section" id="annotation">
+<h2>annotation<a class="headerlink" href="#annotation" title="Permalink to this headline">¶</a></h2>
+<p>定义资源注解。</p>
+</div>
 </div>
 
 
@@ -200,7 +227,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../nginx/nginx.html" class="btn btn-neutral float-right" title="Nginx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="spec_field.html" class="btn btn-neutral float-right" title="spec field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="5_important_field.html" class="btn btn-neutral" title="five important yaml field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

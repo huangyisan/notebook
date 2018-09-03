@@ -90,6 +90,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">yaml</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="5_important_field.html">five important yaml field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spec_field.html">spec field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
 </ul>
 </li>
 </ul>
@@ -188,7 +190,7 @@
   <div class="section" id="yaml">
 <h1>yaml<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h1>
 <p><strong>用于定义k8s的资源清单，apiserver自动将其转换为json格式，然后再提交</strong></p>
-<p><strong>可以使用</strong> <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source.$key1.$key2</span></code> <strong>来查看具体的用法和含义。</strong></p>
+<p><strong>可以使用</strong> <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source.$key1.$key2</span></code> <strong>来查看具体的用法和含义，资源对象若包含了</strong> <code class="docutils literal notranslate"><span class="pre">-required-</span></code> <strong>则表示必须存在的字段。</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@k8s_master</span> <span class="o">~</span><span class="p">]</span><span class="c1"># kubectl explain pod.kind</span>
 <span class="n">KIND</span><span class="p">:</span>     <span class="n">Pod</span>
 <span class="n">VERSION</span><span class="p">:</span>  <span class="n">v1</span>
@@ -214,6 +216,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="5_important_field.html">five important yaml field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spec_field.html">spec field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status_field.html">status field</a></li>
 </ul>
 </div>
 </div>

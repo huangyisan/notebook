@@ -4,7 +4,7 @@ yaml
 
 **用于定义k8s的资源清单，apiserver自动将其转换为json格式，然后再提交**
 
-**可以使用** ``kubectl explain $source.$key1.$key2`` **来查看具体的用法和含义。**
+**可以使用** ``kubectl explain $source.$key1.$key2`` **来查看具体的用法和含义，资源对象若包含了** ``-required-`` **则表示必须存在的字段。**
 
 .. code-block:: python
 
@@ -32,3 +32,5 @@ yaml
 
    5_important_field
    metadata_field
+   spec_field
+   status_field

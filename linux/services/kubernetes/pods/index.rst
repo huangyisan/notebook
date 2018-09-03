@@ -8,3 +8,5 @@ pods
    :maxdepth: 1
 
    pod
+   pod_spec_field
+   pod_FAQ
