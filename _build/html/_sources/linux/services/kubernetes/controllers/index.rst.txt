@@ -15,3 +15,4 @@ controller
    HPA
    Job
    StatefulSet
+   ReplicaSet

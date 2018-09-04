@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Deployment &mdash; Learning Notebook v1.0 documentation</title>
+  <title>ReplicaSet &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="HPA" href="HPA.html" />
-    <link rel="prev" title="DaemonSet" href="DaemonSet.html" /> 
+    <link rel="next" title="nodes" href="../nodes/index.html" />
+    <link rel="prev" title="StatefulSet" href="StatefulSet.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -85,14 +85,14 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">controller</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="CronJob.html">CronJob</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DaemonSet.html">DaemonSet</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Deployment</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">1、用途</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="Deployment.html">Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="HPA.html">HPA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Job.html">Job</a></li>
 <li class="toctree-l3"><a class="reference internal" href="StatefulSet.html">StatefulSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ReplicaSet.html">ReplicaSet</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ReplicaSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">1、用途</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
@@ -177,13 +177,13 @@
         
           <li><a href="index.html">controller</a> &raquo;</li>
         
-      <li>Deployment</li>
+      <li>ReplicaSet</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/controllers/Deployment.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/controllers/ReplicaSet.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -196,16 +196,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="deployment">
-<h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
-<p>无状态控制器</p>
+  <div class="section" id="replicaset">
+<h1>ReplicaSet<a class="headerlink" href="#replicaset" title="Permalink to this headline">¶</a></h1>
+<p>副本控制器</p>
+<p>kubernetes官方不推荐直接使用ReplicaSet。推荐用Deployment。</p>
 <div class="section" id="id1">
 <h2>1、用途<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>通过控制ReplicaSet来控制pod。</li>
-<li>支持滚动更新。</li>
-<li>提供声明式配置的功能。</li>
-<li>只能管理无状态的服务。</li>
+<li>严格控制用户提供的资源副本数。</li>
+<li>一直处于用户满足期望的数量状态，多退少补。</li>
+<li>支持自动扩缩容机制。</li>
 </ul>
 </div>
 </div>
@@ -218,10 +218,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="HPA.html" class="btn btn-neutral float-right" title="HPA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../nodes/index.html" class="btn btn-neutral float-right" title="nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="DaemonSet.html" class="btn btn-neutral" title="DaemonSet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="StatefulSet.html" class="btn btn-neutral" title="StatefulSet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
