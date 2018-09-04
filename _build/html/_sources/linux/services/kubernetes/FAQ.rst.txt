@@ -26,7 +26,7 @@ FAQ
     kubectl label $resource $resource_name $key=$value
     强行覆盖打标签，--overwrite
 
-| 5、查看资源的annotation注解
+| 5、查看资源的annotation注解, 存活探测结果
 .. code-block:: python
 
     kubectl describe $resource $resource_name

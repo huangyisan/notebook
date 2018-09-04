@@ -268,6 +268,60 @@
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>livenessProbe: 如果检测失败，则进行容器重启。</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>包含三种探针，exec httpGet tcpSocket。</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>exec 执行命令的方式进行探测，根据返回值来确定失败还是成功。</dt>
+<dd><div class="first last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">exec</span><span class="p">:</span>
+  <span class="n">command</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">,</span> <span class="s2">&quot;/tmp/healthy&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>httpGet 通过http的方式进行探测。</dt>
+<dd><div class="first last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">httpGet</span><span class="p">:</span>
+  <span class="n">port</span><span class="p">:</span> <span class="mi">80</span>
+  <span class="n">path</span><span class="p">:</span> <span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">tcpSocket 通过tcp的方式进行探测。</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">failureThreshold 表示连续失败n次才算失败，防止探测抖动。默认3次。</p>
+</li>
+<li><p class="first">periodSeconds 表示每次探测间隔时长，默认10s。</p>
+</li>
+<li><p class="first">timeoutSeconds 表示每次探测超时时长，默认1s。</p>
+</li>
+<li><p class="first">initialDelaySeconds 表示等待容器初始化时间，在这个时间后再进行探测，确保容器启动正常。默认容器启动就探测。</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">readinessProbe 表示容器服务是否正常的探测。如果探测失败，则在服务节点上移除这个容器。</p>
+</li>
+<li><dl class="first docutils">
+<dt>lifecycle 用于容器启动和结束前后的钩子。</dt>
+<dd><ul class="first last simple">
+<li>postStart 容器刚运行时执行的行为。</li>
+<li>preStop 容器停止前执行的行为。</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>

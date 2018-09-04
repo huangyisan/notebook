@@ -45,6 +45,30 @@ containers下的field:
         * containerPort: 信息性定义容器端口。
         * name: 信息性定义端口含义。
         * protocol: 没有定义则默认为tcp。
+    * livenessProbe: 如果检测失败，则进行容器重启。
+        * 包含三种探针，exec httpGet tcpSocket。
+            * exec 执行命令的方式进行探测，根据返回值来确定失败还是成功。
+                .. code-block:: python
+
+                    exec:
+                      command: ["test", "-e", "/tmp/healthy"]
+
+            * httpGet 通过http的方式进行探测。
+                .. code-block:: python
+
+                    httpGet:
+                      port: 80
+                      path: /index.html
+
+            * tcpSocket 通过tcp的方式进行探测。
+        * failureThreshold 表示连续失败n次才算失败，防止探测抖动。默认3次。
+        * periodSeconds 表示每次探测间隔时长，默认10s。
+        * timeoutSeconds 表示每次探测超时时长，默认1s。
+        * initialDelaySeconds 表示等待容器初始化时间，在这个时间后再进行探测，确保容器启动正常。默认容器启动就探测。
+    * readinessProbe 表示容器服务是否正常的探测。如果探测失败，则在服务节点上移除这个容器。
+    * lifecycle 用于容器启动和结束前后的钩子。
+        * postStart 容器刚运行时执行的行为。
+        * preStop 容器停止前执行的行为。
 
 ^^^^^^^^^^^^^^
 nodeSelector
@@ -68,3 +92,5 @@ restartPolicy的参数：
     * Always，一旦容器挂了，就重启，总是重启。默认为Always。
     * OnFailure，状态为错误的时候才会重启，正常关闭容器不会重启。
     * Never，从不重启容器。
+
+
