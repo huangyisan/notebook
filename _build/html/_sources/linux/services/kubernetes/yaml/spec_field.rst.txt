@@ -93,4 +93,75 @@ restartPolicy的参数：
     * OnFailure，状态为错误的时候才会重启，正常关闭容器不会重启。
     * Never，从不重启容器。
 
+----------------------
+ReplicaSet资源类型
+----------------------
 
+^^^^^^^^^^^^^^^^^^^
+replicas
+^^^^^^^^^^^^^^^^^^^
+
+* 定义需要创建的副本数量
+
+
+^^^^^^^^^^^^^^^^^^^
+selector
+^^^^^^^^^^^^^^^^^^^
+
+* 定义标签选择器
+
+包含了两种标签类型：
+    * matchLabels
+    * matchExpressions
+
+
+^^^^^^^^^^^^^^^^^^^
+template
+^^^^^^^^^^^^^^^^^^^
+
+* 定义pod模板
+
+里面包含了两个字段，都是pod的属性，一个是 ``metadata`` ，一个是 ``spec`` ，具体可以参考pod中的对应字段解释。
+
+**metadata字段下的label标签必须和ReplicaSet中的spec字段下的selector的标签对应,也就是被管理的pod和replicaset的标签要对应。**
+
+-------------------------
+Deployment资源类型
+-------------------------
+
+**虽然Deployment通过管理ReplicaSet,间接管理pod，但是在定义其yaml文件中是不存在ReplicaSet的。**
+
+^^^^^^^^^^^^^^^^^^
+strategy
+^^^^^^^^^^^^^^^^^^
+
+* 用于定义滚动更新时候的策略。
+
+存在两个字段：
+    * rollingUpdate 当type的类型为rollingUpdate的时候，该字段的内容才生效。
+        * maxSurge 指定具体数量，或者百分比。
+        * maxUnavailable 指定最多有多少个不可用。
+
+    * type
+        * Recreate 重建更新，删除一个创建一个的机制。
+        * rollingUpdate 采用滚动更新机制。
+
+^^^^^^^^^^^^^^^^^^^^^^^^
+revisionHistoryLimit
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 定义保留过去多少个副本，用于回滚。默认为10个。如果是0，则不保存。
+
+^^^^^^^^^^^^^^^^^^^^^^^^
+paused
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 控制更新是否暂停。
+
+^^^^^^^^^^^^^^^^^^^^^^^^
+template
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 定义pod模板。
+
+**和ReplicaSet一样，定义的label必须和外层Deployment资源的selector的label一致。**

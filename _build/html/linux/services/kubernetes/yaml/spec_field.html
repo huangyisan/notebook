@@ -92,6 +92,8 @@
 <li class="toctree-l3"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">spec field</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pod">pod资源类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#replicaset">ReplicaSet资源类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deployment">Deployment资源类型</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
@@ -352,6 +354,90 @@
 </ul>
 </dd>
 </dl>
+</div>
+</div>
+<div class="section" id="replicaset">
+<h2>ReplicaSet资源类型<a class="headerlink" href="#replicaset" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="replicas">
+<h3>replicas<a class="headerlink" href="#replicas" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>定义需要创建的副本数量</li>
+</ul>
+</div>
+<div class="section" id="selector">
+<h3>selector<a class="headerlink" href="#selector" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>定义标签选择器</li>
+</ul>
+<dl class="docutils">
+<dt>包含了两种标签类型：</dt>
+<dd><ul class="first last simple">
+<li>matchLabels</li>
+<li>matchExpressions</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="template">
+<h3>template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>定义pod模板</li>
+</ul>
+<p>里面包含了两个字段，都是pod的属性，一个是 <code class="docutils literal notranslate"><span class="pre">metadata</span></code> ，一个是 <code class="docutils literal notranslate"><span class="pre">spec</span></code> ，具体可以参考pod中的对应字段解释。</p>
+<p><strong>metadata字段下的label标签必须和ReplicaSet中的spec字段下的selector的标签对应,也就是被管理的pod和replicaset的标签要对应。</strong></p>
+</div>
+</div>
+<div class="section" id="deployment">
+<h2>Deployment资源类型<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<p><strong>虽然Deployment通过管理ReplicaSet,间接管理pod，但是在定义其yaml文件中是不存在ReplicaSet的。</strong></p>
+<div class="section" id="strategy">
+<h3>strategy<a class="headerlink" href="#strategy" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>用于定义滚动更新时候的策略。</li>
+</ul>
+<dl class="docutils">
+<dt>存在两个字段：</dt>
+<dd><ul class="first last simple">
+<li><dl class="first docutils">
+<dt>rollingUpdate 当type的类型为rollingUpdate的时候，该字段的内容才生效。</dt>
+<dd><ul class="first last">
+<li>maxSurge 指定具体数量，或者百分比。</li>
+<li>maxUnavailable 指定最多有多少个不可用。</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>type</dt>
+<dd><ul class="first last">
+<li>Recreate 重建更新，删除一个创建一个的机制。</li>
+<li>rollingUpdate 采用滚动更新机制。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="revisionhistorylimit">
+<h3>revisionHistoryLimit<a class="headerlink" href="#revisionhistorylimit" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>定义保留过去多少个副本，用于回滚。默认为10个。如果是0，则不保存。</li>
+</ul>
+</div>
+<div class="section" id="paused">
+<h3>paused<a class="headerlink" href="#paused" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>控制更新是否暂停。</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>template<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>定义pod模板。</li>
+</ul>
+<p><strong>和ReplicaSet一样，定义的label必须和外层Deployment资源的selector的label一致。</strong></p>
 </div>
 </div>
 </div>

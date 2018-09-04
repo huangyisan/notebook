@@ -16,3 +16,4 @@ controller
    Job
    StatefulSet
    ReplicaSet
+   CDR

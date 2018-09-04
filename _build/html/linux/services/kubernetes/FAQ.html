@@ -197,12 +197,12 @@
 </pre></div>
 </div>
 <div class="line-block">
-<div class="line">3、查看pod资源标签，以及过滤标签</div>
+<div class="line">3、查看pod资源标签，以及过滤标签，标签选择器selector的matchExpressions和matchLabels区别</div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl get pods --show-labels
-kubectl get pods -l $labels_string1, $labels_string2 --show-labels
-kubectl get pods -l &quot;$key in ($value1,$value2,$value3)&quot;
-kubectl get pods -l &quot;$key notin ($value1,$value2,$value3)&quot;
+kubectl get pods -l $labels_string1, $labels_string2 --show-labels   # matchLabels的方式
+kubectl get pods -l &quot;$key in ($value1,$value2,$value3)&quot;    # matchExpressions的方式
+kubectl get pods -l &quot;$key notin ($value1,$value2,$value3)&quot;  # matchExpressions的方式
 </pre></div>
 </div>
 <div class="line-block">
@@ -216,6 +216,56 @@ kubectl get pods -l &quot;$key notin ($value1,$value2,$value3)&quot;
 <div class="line">5、查看资源的annotation注解, 存活探测结果</div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl describe $resource $resource_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">6、修改编辑资源，可用于修改副本数量，滚动升级等操作。不是每一种key的value都是可以被修改的</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl edit $resource $resource_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">7、查看资源的滚动历史</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl rollout history $resource $resource_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">8、对deployment打补丁操作,patch的方式</div>
+<div class="line">kubectl patch deployment $resource_name -p $json_string</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">patch</span> <span class="n">deployment</span> <span class="n">myapp</span><span class="o">-</span><span class="n">deploy</span> <span class="o">-</span><span class="n">p</span> <span class="s1">&#39;{&quot;spec&quot;:{&quot;replicas&quot;:5}}&#39;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">9、使用set命令替换deployment中资源的镜像</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl set image deployment $deployment_name $image_key=$value
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">10、暂停某个更新中的deployment</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl rollout pause deployment $deployment_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">11、监视deployment更新过程</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl rollout status deployment $deployment_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">12、继续更新暂停中的deployment</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl rollout resume  deployment $deployment_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">13、回滚deployment到上个版本，或回滚到指定版本</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl rollout undo deployment $deployment_name
+kubectl rollout undo deployment $deployment_name  --to-revision=1
 </pre></div>
 </div>
 </div>
