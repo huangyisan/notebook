@@ -93,6 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Job.html">Job</a></li>
 <li class="toctree-l3"><a class="reference internal" href="StatefulSet.html">StatefulSet</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ReplicaSet.html">ReplicaSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CDR.html">CDR</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
@@ -199,10 +200,12 @@
   <div class="section" id="daemonset">
 <h1>DaemonSet<a class="headerlink" href="#daemonset" title="Permalink to this headline">¶</a></h1>
 <p>一个node一个副本</p>
+<p><strong>在ds.spec.template.spec下有个hostNetwork参数，将pod将直接使用主机的网络名称空间。这样可以直接通过node节点的地址来访问节点上的DaemonsSet了。</strong></p>
 <div class="section" id="id1">
 <h2>1、用途<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>确保集群中每一个node节点，只运行一个pod副本。</li>
+<li>随着集群规模的变动，而变动，比如添加进一个node，则自动再node上起一个副本提供服务。</li>
 </ul>
 </div>
 </div>

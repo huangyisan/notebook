@@ -22,6 +22,9 @@ containers
 containers下的field:
     * name 表示container的名称。
     * image 表示该container使用的镜像。
+        * env 传入镜像的变量，多个变量用list的方式。
+            * name 变量名
+            * value 变量值
     * imagePullPolicy 表示镜像获取策略。
         * 如果镜像标签为latest，则默认值为 ``Always`` ，表示总是去镜像仓库下载。
         * ``Never`` , 本地有就用，没有就不下载，也不进行后续处理。
@@ -92,6 +95,12 @@ restartPolicy的参数：
     * Always，一旦容器挂了，就重启，总是重启。默认为Always。
     * OnFailure，状态为错误的时候才会重启，正常关闭容器不会重启。
     * Never，从不重启容器。
+
+^^^^^^^^^^^^^^
+hostNetwork
+^^^^^^^^^^^^^^
+
+* 这个pod将直接使用主机的网络名称空间。
 
 ----------------------
 ReplicaSet资源类型
@@ -165,3 +174,68 @@ template
 * 定义pod模板。
 
 **和ReplicaSet一样，定义的label必须和外层Deployment资源的selector的label一致。**
+
+
+-------------------------
+DaemonSet资源类型
+-------------------------
+
+**和ReplicaSet类似，但不存在 ``replicas`` 字段。**
+
+^^^^^^^^^^^^^^^^^^^^^^^^
+updateStrategy
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 设定更新策略。
+
+其和Deployment一样有着 ``type`` 字段。
+
+    * type 设定更新类型，默认为 ``OnDelete`` ,再删除时更新。
+    * rollingUpdate 滚动更新策略只有 ``maxUnvaliable``。
+
+
+----------------------
+Service资源类型
+----------------------
+
+^^^^^^^^^^^^^^^^^^^
+ports
+^^^^^^^^^^^^^^^^^^^
+
+* 指定service某端口和后端容器端口建立关系。
+    * name 表示port的名称。
+    * nodePort 表示指定节点上的端口。 **前提是type类型为NodePort。**
+    * port 被service暴露给外部，对外提供服务的端口。
+    * targetPort pod容器端口。
+
+^^^^^^^^^^^^^^^^^^^
+selector
+^^^^^^^^^^^^^^^^^^^
+
+* 表示关联哪些pod资源。
+
+
+^^^^^^^^^^^^^^^^^^^
+clusterIP
+^^^^^^^^^^^^^^^^^^^
+
+* 手动指定service的ip。
+
+
+^^^^^^^^^^^^^^^^^^^
+type
+^^^^^^^^^^^^^^^^^^^
+
+* 指定service的类型。
+    * ClusterIP 默认类型，仅用于集群内通信。此时ports字段只有 ``port`` 和 ``targetPort`` 有用。
+    * NodePort 让集群外部的流量进行访问。通过每个Node上的IP和静态端口（NodePort）暴露服务。NodePort服务会路由到ClusterIP服务，这个ClusterIP服务会自动创建。通过请求<NodeIP>:<NodePort>，可以从集群的外部访问一个NodePort服务。
+    * LoadBalancer 使用云厂商提供的负载均衡器，对外暴露服务。
+    * ExternalName 把集群外部的服务引入集群内部。
+
+^^^^^^^^^^^^^^^^^^^
+sessionAffinity
+^^^^^^^^^^^^^^^^^^^
+
+* session亲和性，类似调度后端的权重。
+    * None 类似轮训请求pod服务。
+    * ClusterIP 根据ClusterIP指定调度。
