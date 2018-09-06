@@ -81,12 +81,14 @@
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="kubernetes.html">Kubernetes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="addone/index.html">addone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="communicate/index.html">network communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/index.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/index.html">db</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nodes/index.html">nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/index.html">services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="db/index.html">db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage/index.html">storage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="yaml/index.html">yaml</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">FAQ</a></li>
 </ul>
@@ -267,6 +269,23 @@ kubectl get pods -l &quot;$key notin ($value1,$value2,$value3)&quot;  # matchExp
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl rollout undo deployment $deployment_name
 kubectl rollout undo deployment $deployment_name  --to-revision=1
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line">14、创建和查看namespace</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">create</span> <span class="n">namespace</span> <span class="n">dev</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">ns</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">15、获取指定名称空间的pod资源信息</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>kubectl get pod -n $namespace
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">16、kubectl create和kubectl apply的区别</div>
+<div class="line">create 行为偏向从无到有产生一个资源，apply 行为偏向对一个已经存在的资源进行upate操作。</div>
 </div>
 </div>
 

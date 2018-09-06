@@ -228,7 +228,7 @@ type
 
 * 指定service的类型。
     * ClusterIP 默认类型，仅用于集群内通信。此时ports字段只有 ``port`` 和 ``targetPort`` 有用。
-    * NodePort 让集群外部的流量进行访问。通过每个Node上的IP和静态端口（NodePort）暴露服务。NodePort服务会路由到ClusterIP服务，这个ClusterIP服务会自动创建。通过请求<NodeIP>:<NodePort>，可以从集群的外部访问一个NodePort服务。
+    * NodePort 让集群外部的流量进行访问。通过每个Node上的IP和静态端口（NodePort）暴露服务。NodePort服务会路由到ClusterIP服务，这个ClusterIP服务会自动创建。通过请求<NodeIP>:<NodePort>，可以从集群的外部访问一个NodePort服务。若没有指定，则是随机端口。
     * LoadBalancer 使用云厂商提供的负载均衡器，对外暴露服务。
     * ExternalName 把集群外部的服务引入集群内部。
 
@@ -250,13 +250,17 @@ rule
 ^^^^^^^^^^^^^^^^^^^
 
 * 用于定义配置主机的调度规则。如果没有配置，则流量都被转发给默认backend。
-    * host 指定调度给某主机。类似nginx的虚拟主机。
-    * http 指定调度给某http，指定路径。类似nginx的location。
+    * host 指定调度给某主机。类似nginx的server_name。
+    * http 指定调度给某http。
+        * path 指定路径。类似nginx的location。
+        * backend 调度给后端的service。
+            * serviceName 指定service的名称。
+            * servicePort 指定service的端口。
+
 
 ^^^^^^^^^^^^^^^^^^^
-backend
+tls
 ^^^^^^^^^^^^^^^^^^^
 
-* 调度给后端的service。
-    * serviceName 指定service的名称。
-    * servicePort 指定service的端口。
+* 使用https的时候才会用到。
+

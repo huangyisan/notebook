@@ -12,9 +12,10 @@ Kubernetes
    addone/index
    communicate/index
    controllers/index
+   db/index
    nodes/index
    pods/index
    services/index
-   db/index
+   storage/index
    yaml/index
    FAQ

@@ -84,10 +84,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../addone/index.html">addone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">network communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">storage</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">yaml</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="5_important_field.html">five important yaml field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
@@ -518,7 +519,7 @@
 <dt>指定service的类型。</dt>
 <dd><ul class="first last">
 <li>ClusterIP 默认类型，仅用于集群内通信。此时ports字段只有 <code class="docutils literal notranslate"><span class="pre">port</span></code> 和 <code class="docutils literal notranslate"><span class="pre">targetPort</span></code> 有用。</li>
-<li>NodePort 让集群外部的流量进行访问。通过每个Node上的IP和静态端口（NodePort）暴露服务。NodePort服务会路由到ClusterIP服务，这个ClusterIP服务会自动创建。通过请求&lt;NodeIP&gt;:&lt;NodePort&gt;，可以从集群的外部访问一个NodePort服务。</li>
+<li>NodePort 让集群外部的流量进行访问。通过每个Node上的IP和静态端口（NodePort）暴露服务。NodePort服务会路由到ClusterIP服务，这个ClusterIP服务会自动创建。通过请求&lt;NodeIP&gt;:&lt;NodePort&gt;，可以从集群的外部访问一个NodePort服务。若没有指定，则是随机端口。</li>
 <li>LoadBalancer 使用云厂商提供的负载均衡器，对外暴露服务。</li>
 <li>ExternalName 把集群外部的服务引入集群内部。</li>
 </ul>
@@ -550,19 +551,13 @@
 <li><dl class="first docutils">
 <dt>用于定义配置主机的调度规则。如果没有配置，则流量都被转发给默认backend。</dt>
 <dd><ul class="first last">
-<li>host 指定调度给某主机。类似nginx的虚拟主机。</li>
-<li>http 指定调度给某http，指定路径。类似nginx的location。</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</div>
-<div class="section" id="backend">
-<h3>backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<li>host 指定调度给某主机。类似nginx的server_name。</li>
 <li><dl class="first docutils">
-<dt>调度给后端的service。</dt>
+<dt>http 指定调度给某http。</dt>
+<dd><ul class="first last">
+<li>path 指定路径。类似nginx的location。</li>
+<li><dl class="first docutils">
+<dt>backend 调度给后端的service。</dt>
 <dd><ul class="first last">
 <li>serviceName 指定service的名称。</li>
 <li>servicePort 指定service的端口。</li>
@@ -570,6 +565,20 @@
 </dd>
 </dl>
 </li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="tls">
+<h3>tls<a class="headerlink" href="#tls" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>使用https的时候才会用到。</li>
 </ul>
 </div>
 </div>

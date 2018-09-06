@@ -86,3 +86,18 @@ FAQ
     kubectl rollout undo deployment $deployment_name
     kubectl rollout undo deployment $deployment_name  --to-revision=1
 
+| 14、创建和查看namespace
+
+.. code-block:: python
+
+    kubectl create namespace dev
+    kubectl get ns
+
+| 15、获取指定名称空间的pod资源信息
+
+.. code-block:: python
+
+    kubectl get pod -n $namespace
+
+| 16、kubectl create和kubectl apply的区别
+| create 行为偏向从无到有产生一个资源，apply 行为偏向对一个已经存在的资源进行upate操作。
