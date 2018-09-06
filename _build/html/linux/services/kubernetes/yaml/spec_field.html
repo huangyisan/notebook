@@ -81,6 +81,7 @@
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../addone/index.html">addone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">network communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
@@ -96,6 +97,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#deployment">Deployment资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#daemonset">DaemonSet资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#service">Service资源类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ingress">Ingress资源类型</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
@@ -533,6 +535,37 @@
 <dd><ul class="first last">
 <li>None 类似轮训请求pod服务。</li>
 <li>ClusterIP 根据ClusterIP指定调度。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ingress">
+<h2>Ingress资源类型<a class="headerlink" href="#ingress" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rule">
+<h3>rule<a class="headerlink" href="#rule" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>用于定义配置主机的调度规则。如果没有配置，则流量都被转发给默认backend。</dt>
+<dd><ul class="first last">
+<li>host 指定调度给某主机。类似nginx的虚拟主机。</li>
+<li>http 指定调度给某http，指定路径。类似nginx的location。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="backend">
+<h3>backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>调度给后端的service。</dt>
+<dd><ul class="first last">
+<li>serviceName 指定service的名称。</li>
+<li>servicePort 指定service的端口。</li>
 </ul>
 </dd>
 </dl>

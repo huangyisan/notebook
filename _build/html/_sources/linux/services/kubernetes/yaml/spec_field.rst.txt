@@ -239,3 +239,24 @@ sessionAffinity
 * session亲和性，类似调度后端的权重。
     * None 类似轮训请求pod服务。
     * ClusterIP 根据ClusterIP指定调度。
+
+
+----------------------
+Ingress资源类型
+----------------------
+
+^^^^^^^^^^^^^^^^^^^
+rule
+^^^^^^^^^^^^^^^^^^^
+
+* 用于定义配置主机的调度规则。如果没有配置，则流量都被转发给默认backend。
+    * host 指定调度给某主机。类似nginx的虚拟主机。
+    * http 指定调度给某http，指定路径。类似nginx的location。
+
+^^^^^^^^^^^^^^^^^^^
+backend
+^^^^^^^^^^^^^^^^^^^
+
+* 调度给后端的service。
+    * serviceName 指定service的名称。
+    * servicePort 指定service的端口。

@@ -9,6 +9,7 @@ Kubernetes
 .. toctree::
    :maxdepth: 1
 
+   addone/index
    communicate/index
    controllers/index
    nodes/index
