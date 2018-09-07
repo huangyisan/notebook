@@ -677,12 +677,27 @@
 </dd>
 </dl>
 </li>
+<li>pvc的accessModes必须得是pv的accessmodes的子集。</li>
 </ul>
 </div>
 <div class="section" id="resources">
 <h3>resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>资源限制。</li>
+<li><dl class="first docutils">
+<dt>资源限制。</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>request: 设定资源需求。</dt>
+<dd><ul class="first last">
+<li>storage 指定存储资源限制。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <div class="section" id="id4">
@@ -710,8 +725,36 @@
 <li>pv的spec内容几乎和pod上的volumes的spec几乎一致。</li>
 <li>也就是由pv资源统一配置好需要的关联的实体存储设备，然后在pod上用pvc来调用即可。</li>
 </ul>
-<div class="section" id="id5">
-<h3>accessModes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="capacity">
+<h3>capacity<a class="headerlink" href="#capacity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>指定存储空间大小。通过resourceModel来指定类型。 <a class="reference external" href="https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/resources.md">resource model on github</a></li>
+<li><dl class="first docutils">
+<dt>对于存储的资源限制只有 <code class="docutils literal notranslate"><span class="pre">storage</span></code> 这一个类型。</dt>
+<dd><ul class="first last">
+<li>storage 限制存储空间大小，需要携带单位(E, P, T, G, M, K, m)或者(Ei, Pi, Ti, Gi, Mi, Ki)。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="persistentvolumereclaimpolicy">
+<h3>persistentVolumeReclaimPolicy<a class="headerlink" href="#persistentvolumereclaimpolicy" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming">官方persistentVolumeReclaimPolicy</a></p>
+<p>存储卷reclaim规则可以通过 kubectl get pv查看。</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>设定存储卷重新调用的策略，总共三种：</dt>
+<dd><ul class="first last">
+<li>retain 当pod不在关联pvc，pvc释放后，数据依旧保留不释放。</li>
+<li>delete 当pod不在关联pvc，pvc释放后，pv自身也释放数据，并且自身pv也释放。</li>
+<li>recycle 当pod不在关联pvc，pvc释放后，数据不再保留，但pv自身还在，可以被其他pvc使用。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 </div>
 </div>

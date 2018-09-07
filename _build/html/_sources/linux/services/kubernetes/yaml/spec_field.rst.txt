@@ -315,6 +315,7 @@ accessModes
     * ReadWriteOnce(RWO) 单路读写
     * ReadOnlyMany(ROX) 多路只读
     * ReadWriteMany(RWX) 多路读写
+* pvc的accessModes必须得是pv的accessmodes的子集。
 
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -322,6 +323,8 @@ resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * 资源限制。
+    * request: 设定资源需求。
+        * storage 指定存储资源限制。
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 selector
@@ -349,8 +352,27 @@ pv资源类型
 * 也就是由pv资源统一配置好需要的关联的实体存储设备，然后在pod上用pvc来调用即可。
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-accessModes
+capacity
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 指定存储空间大小。通过resourceModel来指定类型。 `resource model on github <https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/resources.md>`_
+* 对于存储的资源限制只有 ``storage`` 这一个类型。
+    * storage 限制存储空间大小，需要携带单位(E, P, T, G, M, K, m)或者(Ei, Pi, Ti, Gi, Mi, Ki)。
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+persistentVolumeReclaimPolicy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`官方persistentVolumeReclaimPolicy <https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming>`_
+
+存储卷reclaim规则可以通过 kubectl get pv查看。
+
+* 设定存储卷重新调用的策略，总共三种：
+    * retain 当pod不在关联pvc，pvc释放后，数据依旧保留不释放。
+    * delete 当pod不在关联pvc，pvc释放后，pv自身也释放数据，并且自身pv也释放。
+    * recycle 当pod不在关联pvc，pvc释放后，数据不再保留，但pv自身还在，可以被其他pvc使用。
+
+
 
 
 

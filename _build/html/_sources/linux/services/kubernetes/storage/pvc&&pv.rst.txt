@@ -15,7 +15,7 @@ persistentVolumeClaim persistentVolume
 | 1、pod中定义需要使用存储卷的规格大小。其namespace和pvc中的namespace建立绑定关系。
 | 2、pvc和pv建立绑定关系。
 | 3、pv则是真正存储设备(nas,glusterfs等)上的一段空间。
-| 4、当有服务调用pvc的时候，pvc会根据pod服务定义的资源规格大小去绑定规格大小一致的pv资源。
+| 4、当有服务调用pvc的时候，pvc会根据pod服务定义的资源规格大小去绑定规格大小一致或向上取最相似规格大小的pv资源。
 
 * pv和pvc都是kubernetes上的一种资源。
 * 一个pv只能和一个pvc绑定。
