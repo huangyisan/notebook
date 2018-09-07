@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>storage &mdash; Learning Notebook v1.0 documentation</title>
+  <title>persistentVolumeClaim &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -27,9 +27,7 @@
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="persistentVolumeClaim" href="pvc.html" />
-    <link rel="prev" title="service" href="../services/service.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -79,23 +77,8 @@
             
             
               <p class="caption"><span class="caption-text">Linux Common Service:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../kubernetes.html">Kubernetes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../addone/index.html">addone</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../communicate/index.html">network communication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../controllers/index.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../db/index.html">db</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">storage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pvc.html">persistentVolumeClaim</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../yaml/index.html">yaml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubernetes.html">Kubernetes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../nginx/nginx.html">Nginx</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Linux System:</span></p>
@@ -166,15 +149,13 @@
     
       <li><a href="../../../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
-        
-      <li>storage</li>
+      <li>persistentVolumeClaim</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/storage/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/storage/pvc.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -187,45 +168,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="storage">
-<h1>storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h1>
-<p><strong>kubernete存储，属于pod级别</strong>
-<strong>存储卷在pod上定义，容器要使用，则需要在容器中挂载和绑定。</strong>
-<strong>先挂载存储卷，再启动容器。</strong></p>
-<p>存储卷不属于容器，属于pod</p>
-<dl class="docutils">
-<dt>存储卷类型：</dt>
-<dd><ul class="first last simple">
-<li>emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。当临时目录或缓存用。同个pod内多个容器若选用同个存储卷挂载，则这些个容器都能相互访问到挂载的路径</li>
-<li>hostPath 通过节点node,挂载到pod，在节点node上持久化存储，只有节点node挂了才会受到影响。</li>
-<li><dl class="first docutils">
-<dt>网络存储 脱离节点node的存储，不会收到node状态的影响，持久化。</dt>
-<dd><ul class="first last">
-<li>SAN 协议 iSCSI 等。</li>
-<li>NAS 协议 nfs cifs 等。</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li>分布式存储 glusterfs rbd cephfs。</li>
-<li>云存储 EBS OSS 等。</li>
-</ul>
-</dd>
-<dt>kuerbetes支持的存储卷类型：</dt>
-<dd><ul class="first last simple">
-<li>kubectl explain pods.sepc.volumes 查看。</li>
-</ul>
-</dd>
-</dl>
-<p><strong>在kubernetes中使用存储卷的步骤:</strong></p>
-<div class="line-block">
-<div class="line">1、在pod上定义volumes，voluems指定关联到哪个存储设备。</div>
-<div class="line">2、在容器使用volumeMounts，将存储卷挂载。</div>
+  <div class="section" id="persistentvolumeclaim">
+<h1>persistentVolumeClaim<a class="headerlink" href="#persistentvolumeclaim" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1、现状<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>1、存储设备，存储类型繁多，如果真要使用，则需要花费大量时间去了解各种存储的配置。</p>
 </div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="pvc.html">persistentVolumeClaim</a></li>
+<div class="section" id="pvc">
+<h2>2、pvc的逻辑<a class="headerlink" href="#pvc" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">1、pod中定义需要使用存储卷的规格。其namespace和pvc中的namespace建立绑定关系。</div>
+<div class="line">2、pvc和pv建立绑定关系。</div>
+<div class="line">3、pv则是真正存储设备(nas,glusterfs等)上的一段空间。</div>
+<div class="line">4、当有服务调用pvc的时候，pvc会根据pod服务定义的资源规格去绑定相似规格的pv资源。</div>
+</div>
+<ul class="simple">
+<li>pv和pvc都是kubernetes上的一种资源。</li>
 </ul>
+</div>
+<div class="section" id="id2">
+<h2>3、三者关系<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>如下图所示：</p>
+<img alt="../../../../_images/pvc.png" src="../../../../_images/pvc.png" />
+<div class="line-block">
+<div class="line">1、存储工程师创建维护好具体的存储设备。</div>
+<div class="line">2、运维工程师统一创建pv和pvc资源。</div>
+<div class="line">3、用户则在pods中创建挂载，关联pvc的namespace。</div>
+</div>
 </div>
 </div>
 
@@ -234,15 +203,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="pvc.html" class="btn btn-neutral float-right" title="persistentVolumeClaim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../services/service.html" class="btn btn-neutral" title="service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

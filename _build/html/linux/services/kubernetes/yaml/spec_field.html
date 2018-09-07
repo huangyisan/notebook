@@ -614,7 +614,7 @@
 </li>
 <li>gitRepo 把git仓库作为存储卷使用，宿主机node把git仓库中的内容clone到本地，挂载进pod里面。</li>
 <li><dl class="first docutils">
-<dt>hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。</dt>
+<dt>hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。但是若节点node挂了，则会影响到存储。</dt>
 <dd><ul class="first last">
 <li>path 定义宿主机上的路径。</li>
 <li><dl class="first docutils">
@@ -631,6 +631,16 @@
 </dd>
 </dl>
 </li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nfs 使用nfs挂载。可以持久化，pod释放也不会收到影响。</dt>
+<dd><ul class="first last">
+<li>path 指定nfs暴露出来的路径。</li>
+<li>readOnly 是否只读。默认为false。</li>
+<li>server nfs服务器地址。</li>
 </ul>
 </dd>
 </dl>

@@ -283,7 +283,7 @@ volumes下的field:
         * medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。
         * sizeLimit 设置空间上限。
     * gitRepo 把git仓库作为存储卷使用，宿主机node把git仓库中的内容clone到本地，挂载进pod里面。
-    * hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。
+    * hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。但是若节点node挂了，则会影响到存储。
         * path 定义宿主机上的路径。
         * type 7种类型。
             * DirectoryOrCreate 挂载node节点上的路径，如果不存在则创建该路径。
@@ -293,3 +293,7 @@ volumes下的field:
             * Socket 挂载node节点的socket。
             * CharDevice 挂载node节点上的字符类型设备。
             * BlockDevice 挂载node节点上的块设备。
+    * nfs 使用nfs挂载。可以持久化，pod释放也不会收到影响。
+        * path 指定nfs暴露出来的路径。
+        * readOnly 是否只读。默认为false。
+        * server nfs服务器地址。
