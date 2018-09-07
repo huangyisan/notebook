@@ -99,7 +99,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#daemonset">DaemonSet资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#service">Service资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ingress">Ingress资源类型</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#storage">storage资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pvc">pvc资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pv">pv资源类型</a></li>
 </ul>
@@ -355,6 +354,26 @@
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>env 定义container的环境变量。</dt>
+<dd><ul class="first last simple">
+<li>name 变量名。</li>
+<li>value 变量值。</li>
+<li><dl class="first docutils">
+<dt>valueFrom 从其他资源引入环境变量。</dt>
+<dd><ul class="first last">
+<li>configMapKeyRef 从configmap的某个key引入。</li>
+<li>fieldRef 从pod自身的字段引入。比如metadata.namespace。</li>
+<li>resourceFieldRef 从资源限制的字段引入。比如limits.memory。</li>
+<li>secretKeyRef 从secret资源的某个key引入。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
@@ -476,6 +495,72 @@
 </ul>
 <p><strong>和ReplicaSet一样，定义的label必须和外层Deployment资源的selector的label一致。</strong></p>
 </div>
+<div class="section" id="volumes">
+<h3>volumes<a class="headerlink" href="#volumes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>主要指定存储卷的类型。</li>
+</ul>
+<dl class="docutils">
+<dt>volumes下的field:</dt>
+<dd><ul class="first last simple">
+<li>name 存储卷名字。</li>
+<li><dl class="first docutils">
+<dt>emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。可以当临时目录或缓存用。同个pod内多个容器若选用同个存储卷挂载，则这些个容器都能相互访问到挂载的路径。</dt>
+<dd><ul class="first last">
+<li>medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。</li>
+<li>sizeLimit 设置空间上限。</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>gitRepo 把git仓库作为存储卷使用，宿主机node把git仓库中的内容clone到本地，挂载进pod里面。</li>
+<li><dl class="first docutils">
+<dt>hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。但是若节点node挂了，则会影响到存储。</dt>
+<dd><ul class="first last">
+<li>path 定义宿主机上的路径。</li>
+<li><dl class="first docutils">
+<dt>type 7种类型。</dt>
+<dd><ul class="first last">
+<li>DirectoryOrCreate 挂载node节点上的路径，如果不存在则创建该路径。</li>
+<li>Directory 挂载一个node节点上已经存在的的路径。</li>
+<li>FileOrCreate 挂载node节点文件，如果不存在则创建文件。</li>
+<li>File 挂载node节点文件。</li>
+<li>Socket 挂载node节点的socket。</li>
+<li>CharDevice 挂载node节点上的字符类型设备。</li>
+<li>BlockDevice 挂载node节点上的块设备。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nfs 使用nfs挂载。可以持久化，pod释放也不会收到影响。</dt>
+<dd><ul class="first last">
+<li>path 指定nfs暴露出来的路径。</li>
+<li>readOnly 是否只读。默认为false。</li>
+<li>server nfs服务器地址。</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>persistentVolumeClaim 使用pvc关联pv。</dt>
+<dd><ul class="first last">
+<li>claimName pvc名称，需要和已经存在的pv名称一致。</li>
+<li>readOnly 是否只读</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>secret 给pod资源注入secret配置信息。密文存放。</li>
+<li>configMap 给pod资源注入配置信息。可以作为k8s的配置中心。</li>
+</ul>
+</dd>
+</dl>
+</div>
 </div>
 <div class="section" id="daemonset">
 <h2>DaemonSet资源类型<a class="headerlink" href="#daemonset" title="Permalink to this headline">¶</a></h2>
@@ -592,73 +677,6 @@
 <ul class="simple">
 <li>使用https的时候才会用到。</li>
 </ul>
-</div>
-</div>
-<div class="section" id="storage">
-<h2>storage资源类型<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="volumes">
-<h3>volumes<a class="headerlink" href="#volumes" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>主要指定存储卷的类型。</li>
-</ul>
-<dl class="docutils">
-<dt>volumes下的field:</dt>
-<dd><ul class="first last simple">
-<li>name 存储卷名字。</li>
-<li><dl class="first docutils">
-<dt>emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。可以当临时目录或缓存用。同个pod内多个容器若选用同个存储卷挂载，则这些个容器都能相互访问到挂载的路径。</dt>
-<dd><ul class="first last">
-<li>medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。</li>
-<li>sizeLimit 设置空间上限。</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li>gitRepo 把git仓库作为存储卷使用，宿主机node把git仓库中的内容clone到本地，挂载进pod里面。</li>
-<li><dl class="first docutils">
-<dt>hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。但是若节点node挂了，则会影响到存储。</dt>
-<dd><ul class="first last">
-<li>path 定义宿主机上的路径。</li>
-<li><dl class="first docutils">
-<dt>type 7种类型。</dt>
-<dd><ul class="first last">
-<li>DirectoryOrCreate 挂载node节点上的路径，如果不存在则创建该路径。</li>
-<li>Directory 挂载一个node节点上已经存在的的路径。</li>
-<li>FileOrCreate 挂载node节点文件，如果不存在则创建文件。</li>
-<li>File 挂载node节点文件。</li>
-<li>Socket 挂载node节点的socket。</li>
-<li>CharDevice 挂载node节点上的字符类型设备。</li>
-<li>BlockDevice 挂载node节点上的块设备。</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>nfs 使用nfs挂载。可以持久化，pod释放也不会收到影响。</dt>
-<dd><ul class="first last">
-<li>path 指定nfs暴露出来的路径。</li>
-<li>readOnly 是否只读。默认为false。</li>
-<li>server nfs服务器地址。</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>persistentVolumeClaim 使用pvc关联pv。</dt>
-<dd><ul class="first last">
-<li>claimName pvc名称，需要和已经存在的pv名称一致。</li>
-<li>readOnly 是否只读</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
 </div>
 </div>
 <div class="section" id="pvc">

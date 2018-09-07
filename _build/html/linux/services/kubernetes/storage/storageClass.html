@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>yaml &mdash; Learning Notebook v1.0 documentation</title>
+  <title>storageClass &mdash; Learning Notebook v1.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="five important yaml field" href="5_important_field.html" />
-    <link rel="prev" title="storageClass" href="../storage/storageClass.html" /> 
+    <link rel="next" title="yaml" href="../yaml/index.html" />
+    <link rel="prev" title="persistentVolumeClaim persistentVolume" href="pvc&amp;&amp;pv.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -88,14 +88,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../nodes/index.html">nodes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">storage</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">yaml</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="5_important_field.html">five important yaml field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="spec_field.html">spec field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">storage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configMap.html">configMap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvc&amp;&amp;pv.html">persistentVolumeClaim persistentVolume</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">storageClass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">1、现状</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">2、用途</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml/index.html">yaml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
 </ul>
 </li>
@@ -171,13 +174,15 @@
         
           <li><a href="../kubernetes.html">Kubernetes</a> &raquo;</li>
         
-      <li>yaml</li>
+          <li><a href="index.html">storage</a> &raquo;</li>
+        
+      <li>storageClass</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../../_sources/linux/services/kubernetes/yaml/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/linux/services/kubernetes/storage/storageClass.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -190,39 +195,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="yaml">
-<h1>yaml<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h1>
-<p><strong>用于定义k8s的资源清单，apiserver自动将其转换为json格式，然后再提交</strong></p>
-<p><strong>可以使用</strong> <code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">explain</span> <span class="pre">$source.$key1.$key2</span></code> <strong>来查看具体的用法和含义，资源对象若包含了</strong> <code class="docutils literal notranslate"><span class="pre">-required-</span></code> <strong>则表示必须存在的字段。若字段存在</strong> <code class="docutils literal notranslate"><span class="pre">cannot</span> <span class="pre">be</span> <span class="pre">update</span></code> <strong>则表示不支持热更新</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@k8s_master</span> <span class="o">~</span><span class="p">]</span><span class="c1"># kubectl explain pod.kind</span>
-<span class="n">KIND</span><span class="p">:</span>     <span class="n">Pod</span>
-<span class="n">VERSION</span><span class="p">:</span>  <span class="n">v1</span>
-
-<span class="n">FIELD</span><span class="p">:</span>    <span class="n">kind</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span>
-
-<span class="n">DESCRIPTION</span><span class="p">:</span>
-     <span class="n">Kind</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">string</span> <span class="n">value</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">REST</span> <span class="n">resource</span> <span class="n">this</span> <span class="nb">object</span>
-     <span class="n">represents</span><span class="o">.</span> <span class="n">Servers</span> <span class="n">may</span> <span class="n">infer</span> <span class="n">this</span> <span class="kn">from</span> <span class="nn">the</span> <span class="nn">endpoint</span> <span class="nn">the</span> <span class="nn">client</span> <span class="nn">submits</span>
-     <span class="n">requests</span> <span class="n">to</span><span class="o">.</span> <span class="n">Cannot</span> <span class="n">be</span> <span class="n">updated</span><span class="o">.</span> <span class="n">In</span> <span class="n">CamelCase</span><span class="o">.</span> <span class="n">More</span> <span class="n">info</span><span class="p">:</span>
-     <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">community</span><span class="o">/</span><span class="n">contributors</span><span class="o">/</span><span class="n">devel</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">conventions</span><span class="o">.</span><span class="n">md</span>
-</pre></div>
-</div>
+  <div class="section" id="storageclass">
+<h1>storageClass<a class="headerlink" href="#storageclass" title="Permalink to this headline">¶</a></h1>
+<p><strong>存储设备必须支持restful请求风格的创建接口</strong></p>
+<p>支持的存储设备：</p>
 <ul class="simple">
-<li>大小写敏感。</li>
-<li>使用缩进表示层级关系。</li>
-<li>缩进时不允许使用Tal键，只允许使用空格。</li>
-<li>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可。</li>
-<li>”#” 表示注释，从这个字符一直到行尾，都会被解析器忽略。</li>
-<li>k8s中的yaml数据格式只有 <code class="docutils literal notranslate"><span class="pre">list</span></code> 和 <code class="docutils literal notranslate"><span class="pre">map</span></code> 。</li>
-<li>顶格使用 <code class="docutils literal notranslate"><span class="pre">---</span></code> 分割定义多个资源。</li>
+<li>glusterfs+第三方restful插件</li>
+<li>ceph</li>
 </ul>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="5_important_field.html">five important yaml field</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metadata_field.html">metadata field</a></li>
-<li class="toctree-l1"><a class="reference internal" href="spec_field.html">spec field</a></li>
-<li class="toctree-l1"><a class="reference internal" href="status_field.html">status field</a></li>
-</ul>
+<div class="section" id="id1">
+<h2>1、现状<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">1、当pvc申请pv资源的时候，pv未必能够提供资源，pv资源依赖了后端存储设备。</div>
+<div class="line">2、当没有准备好pv资源，pod会一直pending，直到准备好pv资源。</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>2、用途<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">1、将未分配给pv的存储设备的存储空间根据一定规则进行分类。</div>
+<div class="line">2、动态创建pvc所需需求的pv。</div>
+</div>
 </div>
 </div>
 
@@ -234,10 +227,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="5_important_field.html" class="btn btn-neutral float-right" title="five important yaml field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../yaml/index.html" class="btn btn-neutral float-right" title="yaml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../storage/storageClass.html" class="btn btn-neutral" title="storageClass" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pvc&amp;&amp;pv.html" class="btn btn-neutral" title="persistentVolumeClaim persistentVolume" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

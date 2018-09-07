@@ -75,6 +75,14 @@ containers下的field:
     * volumeMounts 指定挂载哪些个存储或存储卷。
         * name 选择volume的名称，这个在pod层定义了。
         * mountPath: 挂载容器内的路径。
+    * env 定义container的环境变量。
+        * name 变量名。
+        * value 变量值。
+        * valueFrom 从其他资源引入环境变量。
+            * configMapKeyRef 从configmap的某个key引入。
+            * fieldRef 从pod自身的字段引入。比如metadata.namespace。
+            * resourceFieldRef 从资源限制的字段引入。比如limits.memory。
+            * secretKeyRef 从secret资源的某个key引入。
 
 ^^^^^^^^^^^^^^
 nodeSelector
@@ -178,6 +186,38 @@ template
 
 **和ReplicaSet一样，定义的label必须和外层Deployment资源的selector的label一致。**
 
+^^^^^^^^^^^^^^^^^^^^^^^^^
+volumes
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 主要指定存储卷的类型。
+
+volumes下的field:
+    * name 存储卷名字。
+    * emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。可以当临时目录或缓存用。同个pod内多个容器若选用同个存储卷挂载，则这些个容器都能相互访问到挂载的路径。
+        * medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。
+        * sizeLimit 设置空间上限。
+    * gitRepo 把git仓库作为存储卷使用，宿主机node把git仓库中的内容clone到本地，挂载进pod里面。
+    * hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。但是若节点node挂了，则会影响到存储。
+        * path 定义宿主机上的路径。
+        * type 7种类型。
+            * DirectoryOrCreate 挂载node节点上的路径，如果不存在则创建该路径。
+            * Directory 挂载一个node节点上已经存在的的路径。
+            * FileOrCreate 挂载node节点文件，如果不存在则创建文件。
+            * File 挂载node节点文件。
+            * Socket 挂载node节点的socket。
+            * CharDevice 挂载node节点上的字符类型设备。
+            * BlockDevice 挂载node节点上的块设备。
+    * nfs 使用nfs挂载。可以持久化，pod释放也不会收到影响。
+        * path 指定nfs暴露出来的路径。
+        * readOnly 是否只读。默认为false。
+        * server nfs服务器地址。
+    * persistentVolumeClaim 使用pvc关联pv。
+        * claimName pvc名称，需要和已经存在的pv名称一致。
+        * readOnly 是否只读
+    * secret 给pod资源注入secret配置信息。密文存放。
+    * configMap 给pod资源注入配置信息。可以作为k8s的配置中心。
+
 
 -------------------------
 DaemonSet资源类型
@@ -244,6 +284,7 @@ sessionAffinity
     * ClusterIP 根据ClusterIP指定调度。
 
 
+
 ----------------------
 Ingress资源类型
 ----------------------
@@ -267,39 +308,7 @@ tls
 
 * 使用https的时候才会用到。
 
-------------------------
-storage资源类型
-------------------------
 
-^^^^^^^^^^^^^^^^^^^^^^^^^
-volumes
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* 主要指定存储卷的类型。
-
-volumes下的field:
-    * name 存储卷名字。
-    * emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。可以当临时目录或缓存用。同个pod内多个容器若选用同个存储卷挂载，则这些个容器都能相互访问到挂载的路径。
-        * medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。
-        * sizeLimit 设置空间上限。
-    * gitRepo 把git仓库作为存储卷使用，宿主机node把git仓库中的内容clone到本地，挂载进pod里面。
-    * hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。但是若节点node挂了，则会影响到存储。
-        * path 定义宿主机上的路径。
-        * type 7种类型。
-            * DirectoryOrCreate 挂载node节点上的路径，如果不存在则创建该路径。
-            * Directory 挂载一个node节点上已经存在的的路径。
-            * FileOrCreate 挂载node节点文件，如果不存在则创建文件。
-            * File 挂载node节点文件。
-            * Socket 挂载node节点的socket。
-            * CharDevice 挂载node节点上的字符类型设备。
-            * BlockDevice 挂载node节点上的块设备。
-    * nfs 使用nfs挂载。可以持久化，pod释放也不会收到影响。
-        * path 指定nfs暴露出来的路径。
-        * readOnly 是否只读。默认为false。
-        * server nfs服务器地址。
-    * persistentVolumeClaim 使用pvc关联pv。
-        * claimName pvc名称，需要和已经存在的pv名称一致。
-        * readOnly 是否只读
 
 -------------------
 pvc资源类型
@@ -371,14 +380,3 @@ persistentVolumeReclaimPolicy
     * retain 当pod不在关联pvc，pvc释放后，数据依旧保留不释放。
     * delete 当pod不在关联pvc，pvc释放后，pv自身也释放数据，并且自身pv也释放。
     * recycle 当pod不在关联pvc，pvc释放后，数据不再保留，但pv自身还在，可以被其他pvc使用。
-
-
-
-
-
-
-
-
-
-
-

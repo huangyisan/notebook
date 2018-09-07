@@ -31,5 +31,7 @@ kuerbetes支持的存储卷类型：
 .. toctree::
    :maxdepth: 1
 
+   configMap
    pvc&&pv
+   storageClass
 

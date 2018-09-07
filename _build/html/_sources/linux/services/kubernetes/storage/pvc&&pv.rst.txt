@@ -37,7 +37,8 @@ persistentVolumeClaim persistentVolume
 4、注意点
 ------------------
 
-* pv资源的metadata不要去定义namespace，因为pv资源属于系统级别，而不是namespace级别。
+* pv资源的metadata不要去定义namespace，因为pv资源属于标准资源级别，而不是namespace级别。
+* kubernetes 1.9之后版本，pv如果有相关联的pvc未释放，那么无法直接释放pv。
 
 
 

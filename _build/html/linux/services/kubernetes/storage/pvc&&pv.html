@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="yaml" href="../yaml/index.html" />
-    <link rel="prev" title="storage" href="index.html" /> 
+    <link rel="next" title="storageClass" href="storageClass.html" />
+    <link rel="prev" title="configMap" href="configMap.html" /> 
 
   
   <script src="../../../../_static/js/modernizr.min.js"></script>
@@ -89,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../pods/index.html">pods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/index.html">services</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">storage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configMap.html">configMap</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">persistentVolumeClaim persistentVolume</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">1、现状</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pvc">2、pvc的逻辑</a></li>
@@ -96,6 +97,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id3">4、注意点</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="storageClass.html">storageClass</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../yaml/index.html">yaml</a></li>
@@ -228,7 +230,8 @@
 <div class="section" id="id3">
 <h2>4、注意点<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>pv资源的metadata不要去定义namespace，因为pv资源属于系统级别，而不是namespace级别。</li>
+<li>pv资源的metadata不要去定义namespace，因为pv资源属于标准资源级别，而不是namespace级别。</li>
+<li>kubernetes 1.9之后版本，pv如果有相关联的pvc未释放，那么无法直接释放pv。</li>
 </ul>
 </div>
 </div>
@@ -241,10 +244,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../yaml/index.html" class="btn btn-neutral float-right" title="yaml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="storageClass.html" class="btn btn-neutral float-right" title="storageClass" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="storage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="configMap.html" class="btn btn-neutral" title="configMap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
