@@ -279,6 +279,17 @@ volumes
 
 volumes下的field:
     * name 存储卷名字。
-    * emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。当临时目录或缓存用。
+    * emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。可以当临时目录或缓存用。同个pod内多个容器若选用同个存储卷挂载，则这些个容器都能相互访问到挂载的路径。
         * medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。
         * sizeLimit 设置空间上限。
+    * gitRepo 把git仓库作为存储卷使用，宿主机node把git仓库中的内容clone到本地，挂载进pod里面。
+    * hostPath pod被删除后，存储卷依旧保留在node节点上，不会被删除。只要pod被重新调度到这个node节点上，依旧可以加载到原有的数据。
+        * path 定义宿主机上的路径。
+        * type 7种类型。
+            * DirectoryOrCreate 挂载node节点上的路径，如果不存在则创建该路径。
+            * Directory 挂载一个node节点上已经存在的的路径。
+            * FileOrCreate 挂载node节点文件，如果不存在则创建文件。
+            * File 挂载node节点文件。
+            * Socket 挂载node节点的socket。
+            * CharDevice 挂载node节点上的字符类型设备。
+            * BlockDevice 挂载node节点上的块设备。

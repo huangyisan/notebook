@@ -10,7 +10,7 @@ storage
 存储卷不属于容器，属于pod
 
 存储卷类型：
-   * emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。当临时目录或缓存用。
+   * emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。当临时目录或缓存用。同个pod内多个容器若选用同个存储卷挂载，则这些个容器都能相互访问到挂载的路径
    * hostPath 通过节点node,挂载到pod，在节点node上持久化存储，只有节点node挂了才会受到影响。
    * 网络存储 脱离节点node的存储，不会收到node状态的影响，持久化。
       * SAN 协议 iSCSI 等。
