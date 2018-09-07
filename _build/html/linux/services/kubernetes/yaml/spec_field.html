@@ -99,6 +99,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#daemonset">DaemonSet资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#service">Service资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ingress">Ingress资源类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#storage">storage资源类型</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
@@ -343,6 +344,15 @@
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>volumeMounts 指定挂载哪些个存储或存储卷。</dt>
+<dd><ul class="first last simple">
+<li>name 选择volume的名称，这个在pod层定义了。</li>
+<li>mountPath: 挂载容器内的路径。</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
@@ -580,6 +590,31 @@
 <ul class="simple">
 <li>使用https的时候才会用到。</li>
 </ul>
+</div>
+</div>
+<div class="section" id="storage">
+<h2>storage资源类型<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="volumes">
+<h3>volumes<a class="headerlink" href="#volumes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>主要指定存储卷的类型。</li>
+</ul>
+<dl class="docutils">
+<dt>volumes下的field:</dt>
+<dd><ul class="first last simple">
+<li>name 存储卷名字。</li>
+<li><dl class="first docutils">
+<dt>emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。当临时目录或缓存用。</dt>
+<dd><ul class="first last">
+<li>medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。</li>
+<li>sizeLimit 设置空间上限。</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
 </div>
 </div>
 </div>

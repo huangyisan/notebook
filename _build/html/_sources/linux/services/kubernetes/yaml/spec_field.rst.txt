@@ -72,6 +72,9 @@ containers下的field:
     * lifecycle 用于容器启动和结束前后的钩子。
         * postStart 容器刚运行时执行的行为。
         * preStop 容器停止前执行的行为。
+    * volumeMounts 指定挂载哪些个存储或存储卷。
+        * name 选择volume的名称，这个在pod层定义了。
+        * mountPath: 挂载容器内的路径。
 
 ^^^^^^^^^^^^^^
 nodeSelector
@@ -264,3 +267,18 @@ tls
 
 * 使用https的时候才会用到。
 
+------------------------
+storage资源类型
+------------------------
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+volumes
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 主要指定存储卷的类型。
+
+volumes下的field:
+    * name 存储卷名字。
+    * emptyDir 通过节点node,挂载到pod，随着pod的释放而释放存储卷。当临时目录或缓存用。
+        * medium 选择存储媒介类型，是用node节点的物理存储，还是用node节点的内存。
+        * sizeLimit 设置空间上限。
