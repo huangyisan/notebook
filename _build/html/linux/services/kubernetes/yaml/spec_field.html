@@ -100,6 +100,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#service">Service资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ingress">Ingress资源类型</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#storage">storage资源类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pvc">pvc资源类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pv">pv资源类型</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="status_field.html">status field</a></li>
@@ -645,9 +647,71 @@
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>persistentVolumeClaim 使用pvc关联pv。</dt>
+<dd><ul class="first last">
+<li>claimName pvc名称，需要和已经存在的pv名称一致。</li>
+<li>readOnly 是否只读</li>
 </ul>
 </dd>
 </dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="pvc">
+<h2>pvc资源类型<a class="headerlink" href="#pvc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="accessmodes">
+<h3>accessModes<a class="headerlink" href="#accessmodes" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes">官方accessmodes参考文档</a></p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>访问模型，三种类型：</dt>
+<dd><ul class="first last">
+<li>ReadWriteOnce(RWO) 单路读写</li>
+<li>ReadOnlyMany(ROX) 多路只读</li>
+<li>ReadWriteMany(RWX) 多路读写</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h3>resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>资源限制。</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>selector<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>标签选择器，可以通过标签匹配指定的pv资源。</li>
+</ul>
+</div>
+<div class="section" id="volumemode">
+<h3>volumeMode<a class="headerlink" href="#volumemode" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>存储卷的模式。</li>
+</ul>
+</div>
+<div class="section" id="volumename">
+<h3>volumeName<a class="headerlink" href="#volumename" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>存储卷名称。</li>
+</ul>
+</div>
+</div>
+<div class="section" id="pv">
+<h2>pv资源类型<a class="headerlink" href="#pv" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>pv的spec内容几乎和pod上的volumes的spec几乎一致。</li>
+<li>也就是由pv资源统一配置好需要的关联的实体存储设备，然后在pod上用pvc来调用即可。</li>
+</ul>
+<div class="section" id="id5">
+<h3>accessModes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>

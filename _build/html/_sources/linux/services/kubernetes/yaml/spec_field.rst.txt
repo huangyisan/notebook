@@ -297,3 +297,66 @@ volumes下的field:
         * path 指定nfs暴露出来的路径。
         * readOnly 是否只读。默认为false。
         * server nfs服务器地址。
+    * persistentVolumeClaim 使用pvc关联pv。
+        * claimName pvc名称，需要和已经存在的pv名称一致。
+        * readOnly 是否只读
+
+-------------------
+pvc资源类型
+-------------------
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+accessModes
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`官方accessmodes参考文档 <https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes>`_
+
+* 访问模型，三种类型：
+    * ReadWriteOnce(RWO) 单路读写
+    * ReadOnlyMany(ROX) 多路只读
+    * ReadWriteMany(RWX) 多路读写
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+resources
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 资源限制。
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+selector
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 标签选择器，可以通过标签匹配指定的pv资源。
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+volumeMode
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 存储卷的模式。
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+volumeName
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 存储卷名称。
+
+------------------------
+pv资源类型
+------------------------
+
+* pv的spec内容几乎和pod上的volumes的spec几乎一致。
+* 也就是由pv资源统一配置好需要的关联的实体存储设备，然后在pod上用pvc来调用即可。
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+accessModes
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
+
+
+
