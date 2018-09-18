@@ -11,8 +11,9 @@ Welcome to Learning Notebook's documentation!
    :caption: Linux Common Service:
 
    linux/services/kubernetes/kubernetes
+   linux/services/moosefs/moosefs
    linux/services/nginx/nginx
-
+   linux/services/sphinx/sphinx
 
 .. toctree::
    :maxdepth: 1
