@@ -14,6 +14,7 @@ Welcome to Learning Notebook's documentation!
    linux/services/moosefs/moosefs
    linux/services/nginx/nginx
    linux/services/sphinx/sphinx
+   linux/services/jenkins/jenkins
 
 .. toctree::
    :maxdepth: 1
